@@ -53,7 +53,8 @@ Create the django project
 
     $ django-admin startproject tweetmetoo .
 
-Initialize Git by openning GIT cmd (or i imagine GIT shell would do the job)
+Initialize Git by openning windows cmd prompt OR GIT cmd (or i imagine GIT shell would do the job)
+Or a VS code rerminal.
 
 .. code-block:: console
     :emphasize-lines: 1
@@ -61,6 +62,8 @@ Initialize Git by openning GIT cmd (or i imagine GIT shell would do the job)
     In my projects folder
     $ git init 
     Initialized empty Git repository in C:/MyDjangoRestfullReactApps/TwitterLikeApp2/.git/
+    $ git add --all
+    $ git commit -m "Initial Commit"
     
 
 Open the projects folder with Visual Studio
