@@ -42,7 +42,8 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Lets get started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-tweets-model">The Tweets Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preparation">Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-tweets-model">0:32:31 8. The Tweets Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#store-data-from-django-model">0:39:35 9. Store Data from Django Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#intro-to-url-routing-and-dynamic-routing">0:43:10 10. Intro to URL Routing and Dynamic Routing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#handling-dynamic-routing">0:47:57 11. Handling Dynamic Routing</a></li>
@@ -79,14 +80,37 @@
              
   <section id="lets-get-started">
 <h1>Lets get started<a class="headerlink" href="#lets-get-started" title="Permalink to this headline"></a></h1>
+<section id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline"></a></h2>
 <p>Within our projects direcrory we create a virtual environment.
 I like better virtualenv and not pipenv.</p>
 <p>So:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>virtualenv venv
-</span><span class="gp">$ </span>.<span class="se">\v</span>env<span class="se">\s</span>cripts<span class="se">\a</span>ctivate
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>pip install virtualenv
+</span><span class="gp">$ </span>virtualenv venv
+<span class="gp">$ </span>.<span class="se">\v</span>env<span class="se">\s</span>cripts<span class="se">\a</span>ctivate
 <span class="gp gp-VirtualEnv">(venv)</span> <span class="go">C:\MyDjangoRestfullReactApps\TwitterLikeApp2&gt;</span>
+
+<span class="hll"><span class="go">Freeze all the packages i have installed and keep them in requirements.ixi file</span>
+</span><span class="gp">$ </span>pip freeze &gt; requirements.txt
+
+<span class="hll"><span class="go">Install the same packages to a new packages</span>
+</span><span class="gp">$ </span>pip install -r requirements.txt
+
+<span class="hll"><span class="go">OR alternatively</span>
+</span><span class="gp">$ </span>python3.6 -m pip install pipenv --upgrade
+<span class="gp">$ </span>pipenv shell
+<span class="hll"><span class="go">to deactivate it just:</span>
+</span><span class="gp">$ </span><span class="nb">exit</span>
+<span class="hll"><span class="go">In order to install all dependencies of the virtual environment:</span>
+</span><span class="gp">$ </span>pipenv run
+<span class="go">OR</span>
+<span class="gp">$ </span>pipenv install requests
 </pre></div>
 </div>
+<p>In order to activate pipenv virtual environment we run:
+pipenv shell</p>
+<p>OR alternatively (outside the pipenv),
+pipenv –three sync</p>
 <p>After that Sphinx Installation</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>pip install sphinx
 </span><span class="gp">$ </span>mkdir docs
@@ -113,17 +137,20 @@ I like better virtualenv and not pipenv.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>django-admin startproject tweetmetoo .
 </span></pre></div>
 </div>
+<p>Initialize Git by openning windows cmd prompt OR GIT cmd (or i imagine GIT shell would do the job)
+Or a VS code rerminal.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">In my projects folder</span>
+</span><span class="gp">$ </span>git init
+<span class="go">Initialized empty Git repository in C:/MyDjangoRestfullReactApps/TwitterLikeApp2/.git/</span>
+<span class="gp">$ </span>git remote add origin https://github.com/Otinanai1309/tweetmetoo.git
+<span class="gp">$ </span>git add --all
+<span class="gp">$ </span>git commit -m <span class="s2">&quot;Initial Commit&quot;</span>
+</pre></div>
+</div>
 <p>Open the projects folder with Visual Studio</p>
-<p>In order to activate pipenv virtual environment we run:
-pipenv shell
-to deactivate it just:
-exit</p>
-<p>In order to install all dependencies of the virtual environment:
-pipenv run
-OR alternatively (outside the pipenv),
-pipenv –three sync</p>
+</section>
 <section id="the-tweets-model">
-<h2>The Tweets Model<a class="headerlink" href="#the-tweets-model" title="Permalink to this headline"></a></h2>
+<h2>0:32:31 8. The Tweets Model<a class="headerlink" href="#the-tweets-model" title="Permalink to this headline"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>.<span class="se">\m</span>anage.py startapp tweets
 </span></pre></div>
 </div>
@@ -131,6 +158,175 @@ pipenv –three sync</p>
 <section id="store-data-from-django-model">
 <h2>0:39:35 9. Store Data from Django Model<a class="headerlink" href="#store-data-from-django-model" title="Permalink to this headline"></a></h2>
 <p>You Tube video uploaded at: <a class="reference external" href="https://www.youtube.com/watch?v=f1R_bykXHGE&amp;t=1653s">https://www.youtube.com/watch?v=f1R_bykXHGE&amp;t=1653s</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="c1"># tweets/models.py</span>
+</span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="c1"># Create your models here.</span>
+<span class="k">class</span> <span class="nc">Tweet</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;images/&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="c1"># tweetmetoo/settings.py</span>
+</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Django settings for tweetmetoo project.</span>
+
+<span class="sd">Generated by &#39;django-admin startproject&#39; using Django 3.2.13.</span>
+
+<span class="sd">For more information on this file, see</span>
+<span class="sd">https://docs.djangoproject.com/en/3.2/topics/settings/</span>
+
+<span class="sd">For the full list of settings and their values, see</span>
+<span class="sd">https://docs.djangoproject.com/en/3.2/ref/settings/</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">os</span>
+</span>
+<span class="c1"># Build paths inside the project like this: BASE_DIR / &#39;subdir&#39;.</span>
+<span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
+
+
+<span class="c1"># Quick-start development settings - unsuitable for production</span>
+<span class="c1"># See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/</span>
+
+<span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;django-insecure-</span><span class="si">%u</span><span class="s1">o5vr70p_+x9@+g_+%qekm6qjm-zsuqpz8y@jlgf%4bg(8)2)&#39;</span>
+
+<span class="c1"># SECURITY WARNING: don&#39;t run with debug turned on in production!</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="c1"># Application definition</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+<span class="hll">    <span class="s1">&#39;tweets&#39;</span><span class="p">,</span>
+</span><span class="p">]</span>
+
+<span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.middleware.security.SecurityMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.middleware.csrf.CsrfViewMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages.middleware.MessageMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">ROOT_URLCONF</span> <span class="o">=</span> <span class="s1">&#39;tweetmetoo.urls&#39;</span>
+
+<span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.template.backends.django.DjangoTemplates&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;APP_DIRS&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;context_processors&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;django.template.context_processors.debug&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.request&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.contrib.auth.context_processors.auth&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.contrib.messages.context_processors.messages&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">WSGI_APPLICATION</span> <span class="o">=</span> <span class="s1">&#39;tweetmetoo.wsgi.application&#39;</span>
+
+
+<span class="c1"># Database</span>
+<span class="c1"># https://docs.djangoproject.com/en/3.2/ref/settings/#databases</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">BASE_DIR</span> <span class="o">/</span> <span class="s1">&#39;db.sqlite3&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1"># Password validation</span>
+<span class="c1"># https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators</span>
+
+<span class="n">AUTH_PASSWORD_VALIDATORS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.auth.password_validation.UserAttributeSimilarityValidator&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.auth.password_validation.MinimumLengthValidator&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.auth.password_validation.CommonPasswordValidator&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.auth.password_validation.NumericPasswordValidator&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+
+<span class="c1"># Internationalization</span>
+<span class="c1"># https://docs.djangoproject.com/en/3.2/topics/i18n/</span>
+
+<span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s1">&#39;en-us&#39;</span>
+
+<span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s1">&#39;UTC&#39;</span>
+
+<span class="n">USE_I18N</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">USE_L10N</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">USE_TZ</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="c1"># Static files (CSS, JavaScript, Images)</span>
+<span class="c1"># https://docs.djangoproject.com/en/3.2/howto/static-files/</span>
+
+<span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s1">&#39;/static/&#39;</span>
+
+<span class="c1"># Default primary key field type</span>
+<span class="c1"># https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field</span>
+
+<span class="n">DEFAULT_AUTO_FIELD</span> <span class="o">=</span> <span class="s1">&#39;django.db.models.BigAutoField&#39;</span>
+</pre></div>
+</div>
+<p><strong>and Of-course run the migration commands</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>python manage.py makemigrations
+</span><span class="go">Migrations for &#39;tweets&#39;:</span>
+<span class="go">    tweets\migrations\0001_initial.py</span>
+<span class="go">        - Create model Tweet</span>
+<span class="gp">$ </span>python manage.py migrate
+<span class="go">Operations to perform:</span>
+<span class="go">    Apply all migrations: admin, auth, contenttypes, sessions, tweets</span>
+<span class="go">Running migrations:</span>
+<span class="go">    Applying contenttypes.0001_initial... OK</span>
+<span class="go">    Applying auth.0001_initial... OK</span>
+<span class="go">    Applying admin.0001_initial... OK</span>
+<span class="go">    Applying admin.0002_logentry_remove_auto_add... OK</span>
+<span class="go">    Applying admin.0003_logentry_add_action_flag_choices... OK</span>
+<span class="go">    Applying contenttypes.0002_remove_content_type_name... OK</span>
+<span class="go">    Applying auth.0002_alter_permission_name_max_length... OK</span>
+<span class="go">    Applying auth.0003_alter_user_email_max_length... OK</span>
+<span class="go">    Applying auth.0004_alter_user_username_opts... OK</span>
+<span class="go">    Applying auth.0005_alter_user_last_login_null... OK</span>
+<span class="go">    Applying auth.0006_require_contenttypes_0002... OK</span>
+<span class="go">    Applying auth.0007_alter_validators_add_error_messages... OK</span>
+<span class="go">    Applying auth.0008_alter_user_username_max_length... OK</span>
+<span class="go">    Applying auth.0009_alter_user_last_name_max_length... OK</span>
+<span class="go">    Applying auth.0010_alter_group_name_max_length... OK</span>
+<span class="go">    Applying auth.0011_update_proxy_permissions... OK</span>
+<span class="go">    Applying auth.0012_alter_user_first_name_max_length... OK</span>
+<span class="go">    Applying sessions.0001_initial... OK</span>
+<span class="go">    Applying tweets.0001_initial... OK</span>
+</pre></div>
+</div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="hll">$ .<span class="se">\m</span>anage.py shell
 </span>&gt;&gt;&gt; from tweets.models import Tweet
 &gt;&gt;&gt; <span class="nv">obj</span> <span class="o">=</span> Tweet<span class="o">()</span>
