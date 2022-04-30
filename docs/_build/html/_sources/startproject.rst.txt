@@ -1,0 +1,171 @@
+Lets get started
+================
+Within our projects direcrory we create a virtual environment.
+I like better virtualenv and not pipenv.
+
+So:
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ virtualenv venv 
+    $ .\venv\scripts\activate
+    (venv) C:\MyDjangoRestfullReactApps\TwitterLikeApp2> 
+
+
+After that Sphinx Installation
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ pip install sphinx
+    $ mkdir docs
+    $ cd docs
+    $ sphinx-quickstart
+    (install sphinx_rtd_theme)
+    $ pip install sphinx_rtd_theme
+    (install sphinxcontrib-httpdomain)
+    $ pip install sphinxcontrib-httpdomain
+    (install sphinx-copybutton)
+    $ pip install sphinx-copybutton
+
+Install Django 3.2.13 LTS version 
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ cd ..
+    $ pip install Django==3.2.13
+    Successfully installed Django-3.2.13 asgiref-3.5.0 sqlparse-0.4.2
+
+    $ python -m django --version
+    3.2.13
+
+Create the django project
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ django-admin startproject tweetmetoo .
+
+Open the projects folder with Visual Studio
+
+
+
+
+
+
+
+In order to activate pipenv virtual environment we run:
+pipenv shell
+to deactivate it just:
+exit
+
+In order to install all dependencies of the virtual environment:
+pipenv run
+OR alternatively (outside the pipenv),
+pipenv --three sync
+
+The Tweets Model
+----------------
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ .\manage.py startapp tweets
+
+0:39:35 9. Store Data from Django Model
+---------------------------------------
+
+You Tube video uploaded at: https://www.youtube.com/watch?v=f1R_bykXHGE&t=1653s
+
+.. code-block:: shell
+    :emphasize-lines: 1
+
+    $ .\manage.py shell
+    >>> from tweets.models import Tweet
+    >>> obj = Tweet()
+    >>> obj.content = "Hello world!"
+    >>> obj.save()
+
+.. code-block:: shell
+    :emphasize-lines: 1
+
+    $ .\manage.py shell
+    >>> from tweets.models import Tweet
+    >>> obj = Tweet.objects.get(id=1)
+    >>> obj.content
+    'Hello world!'
+
+0:43:10 10. Intro to URL Routing and Dynamic Routing
+----------------------------------------------------
+
+In order to create our first url we start from creating the view. We can create class view 
+or function view.
+After that i can go to the urls.py in my main root and add the url to my view. Of-course 
+i have to build a nice html page for my url.
+
+0:47:57 11. Handling Dynamic Routing
+------------------------------------
+
+There are the changes within the git repository
+
+0:51:32 12. Dynamic View into REST API Endpoint
+-----------------------------------------------
+
+We will change the dynamic view to Rest API view. We will return json data.
+
+The only file we made some changes was views.py
+
+.. code-block:: python
+    :emphasize-lines: 1,26,27,28,29,30,31,32,33,34,35,36,37,38
+
+    # tweets/views.py
+    from django.http import HttpResponse, Http404, JsonResponse
+    from django.shortcuts import render
+
+    from .models import Tweet   # Relative import 
+
+    # Create your views here.
+
+    def home_view(request, *args, **kwargs):
+        return HttpResponse("<h1>Hello World!!!</h1>")
+
+    def home_detail_view(request, tweet_id, *args, **kwargs):
+        """
+        REST API VIEW
+        return json data
+        Consume by JavaScript or Swift or Java or iOS/Android
+        :param request: _description_
+        :type request: _type_
+        :param tweet_id: _description_
+        :type tweet_id: _type_
+        :raises Http404: _description_
+        :return: _description_
+        :rtype: _type_
+        """
+        
+        data = {
+            "id": tweet_id,
+        }
+        status = 200
+        try:
+            obj = Tweet.objects.get(id=tweet_id)
+            data['content'] = obj.content
+        except:
+            data['message'] = "Not found"
+            status = 404
+        
+        
+        return JsonResponse(data, status=status)
+
+
+0:55:50 13. Our First Template
+------------------------------
+
+
+1:00:07 14. Bootstrap & Django Templates
+----------------------------------------
+
+
+Σταμάτησα στο 49:53
