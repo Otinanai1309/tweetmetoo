@@ -45,6 +45,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#preparation">Preparation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-tweets-model">0:32:31 8. The Tweets Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#store-data-from-django-model">0:39:35 9. Store Data from Django Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0:39:35 9. Store Data from Django Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#intro-to-url-routing-and-dynamic-routing">0:43:10 10. Intro to URL Routing and Dynamic Routing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#handling-dynamic-routing">0:47:57 11. Handling Dynamic Routing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dynamic-view-into-rest-api-endpoint">0:51:32 12. Dynamic View into REST API Endpoint</a></li>
@@ -327,8 +328,15 @@ Or a VS code rerminal.</p>
 <span class="go">    Applying tweets.0001_initial... OK</span>
 </pre></div>
 </div>
+</section>
+<section id="id1">
+<h2>0:39:35 9. Store Data from Django Model<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<p>So if i wanna test those files i can do:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="hll">$ .<span class="se">\m</span>anage.py shell
-</span>&gt;&gt;&gt; from tweets.models import Tweet
+</span>Python <span class="m">3</span>.8.7 <span class="o">(</span>tags/v3.8.7:6503f05, Dec <span class="m">21</span> <span class="m">2020</span>, <span class="m">17</span>:59:51<span class="o">)</span> <span class="o">[</span>MSC v.1928 <span class="m">64</span> bit <span class="o">(</span>AMD64<span class="o">)]</span> on win32
+Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+<span class="o">(</span>InteractiveConsole<span class="o">)</span>
+&gt;&gt;&gt; from tweets.models import Tweet
 &gt;&gt;&gt; <span class="nv">obj</span> <span class="o">=</span> Tweet<span class="o">()</span>
 &gt;&gt;&gt; obj.content <span class="o">=</span> <span class="s2">&quot;Hello world!&quot;</span>
 &gt;&gt;&gt; obj.save<span class="o">()</span>
@@ -348,6 +356,68 @@ Or a VS code rerminal.</p>
 or function view.
 After that i can go to the urls.py in my main root and add the url to my view. Of-course
 i have to build a nice html page for my url.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="c1"># tweets/views.py</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+</span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">request</span>
+
+<span class="hll"><span class="kn">from</span> <span class="nn">tweets.models</span> <span class="kn">import</span> <span class="n">Tweet</span>
+</span>
+<span class="c1"># Create your views here.</span>
+<span class="k">def</span> <span class="nf">home_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;&lt;h1&gt;Hello world!!!&lt;/h1&gt;&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tweet_detail_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">Tweet</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dynamic_routing</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;h1&gt; Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">. Have a nice day&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="c1"># tweetmetoo/urls.py</span>
+</span><span class="sd">&quot;&quot;&quot;tweetmetoo URL Configuration</span>
+
+<span class="sd">The `urlpatterns` list routes URLs to views. For more information please see:</span>
+<span class="sd">    https://docs.djangoproject.com/en/3.2/topics/http/urls/</span>
+<span class="sd">Examples:</span>
+<span class="sd">Function views</span>
+<span class="sd">    1. Add an import:  from my_app import views</span>
+<span class="sd">    2. Add a URL to urlpatterns:  path(&#39;&#39;, views.home, name=&#39;home&#39;)</span>
+<span class="sd">Class-based views</span>
+<span class="sd">    1. Add an import:  from other_app.views import Home</span>
+<span class="sd">    2. Add a URL to urlpatterns:  path(&#39;&#39;, Home.as_view(), name=&#39;home&#39;)</span>
+<span class="sd">Including another URLconf</span>
+<span class="sd">    1. Import the include() function: from django.urls import include, path</span>
+<span class="sd">    2. Add a URL to urlpatterns:  path(&#39;blog/&#39;, include(&#39;blog.urls&#39;))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">tweets</span> <span class="kn">import</span> <span class="n">views</span>
+</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="hll">    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">home_view</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;home-view&#39;</span><span class="p">),</span>
+</span><span class="hll">    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;tweets_detail/&lt;int:pk&gt;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">tweet_detail_view</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tweet-detail-view&quot;</span><span class="p">),</span>
+</span><span class="hll">    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;dynamic_routing/&lt;str:name&gt;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">dynamic_routing</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dynamic-routing&quot;</span><span class="p">),</span>
+</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We Run the server and we have our page up and running.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>python manage.py runserver
+</span><span class="go">Watching for file changes with StatReloader</span>
+<span class="go">Performing system checks...</span>
+
+<span class="go">System check identified no issues (0 silenced).</span>
+<span class="go">April 30, 2022 - 18:37:41</span>
+<span class="go">Django version 3.2.13, using settings &#39;tweetmetoo.settings&#39;</span>
+<span class="go">Starting development server at http://127.0.0.1:8000/</span>
+<span class="go">Quit the server with CTRL-BREAK.</span>
+<span class="go">[30/Apr/2022 18:37:44] &quot;GET / HTTP/1.1&quot; 200 23</span>
+<span class="go">Not Found: /favicon.ico</span>
+<span class="go">[30/Apr/2022 18:37:44] &quot;GET /favicon.ico HTTP/1.1&quot; 404 2232</span>
+</pre></div>
+</div>
 </section>
 <section id="handling-dynamic-routing">
 <h2>0:47:57 11. Handling Dynamic Routing<a class="headerlink" href="#handling-dynamic-routing" title="Permalink to this headline"></a></h2>

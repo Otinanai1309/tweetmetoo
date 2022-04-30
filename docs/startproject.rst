@@ -323,6 +323,80 @@ or function view.
 After that i can go to the urls.py in my main root and add the url to my view. Of-course 
 i have to build a nice html page for my url.
 
+.. code-block:: python
+    :emphasize-lines: 1,2,6
+
+    # tweets/views.py
+    from django.http import HttpResponse
+    from django.shortcuts import render
+    from requests import request
+
+    from tweets.models import Tweet
+
+    # Create your views here.
+    def home_view(request, *args, **kwargs):
+        return HttpResponse("<h1>Hello world!!!</h1>")
+
+    def tweet_detail_view(request, pk):
+        obj = Tweet.objects.get(pk=pk)
+        return HttpResponse(obj.content) 
+
+    def dynamic_routing(request, name, *args, **kwargs):
+        return HttpResponse(f"<h1> Hello {name}. Have a nice day")       
+
+
+
+.. code-block:: python
+    :emphasize-lines: 1,19,23,24,25
+
+    # tweetmetoo/urls.py
+    """tweetmetoo URL Configuration
+
+    The `urlpatterns` list routes URLs to views. For more information please see:
+        https://docs.djangoproject.com/en/3.2/topics/http/urls/
+    Examples:
+    Function views
+        1. Add an import:  from my_app import views
+        2. Add a URL to urlpatterns:  path('', views.home, name='home')
+    Class-based views
+        1. Add an import:  from other_app.views import Home
+        2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+    Including another URLconf
+        1. Import the include() function: from django.urls import include, path
+        2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    """
+    from django.contrib import admin
+    from django.urls import path
+    from tweets import views
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', views.home_view, name = 'home-view'),
+        path('tweets_detail/<int:pk>', views.tweet_detail_view, name="tweet-detail-view"),
+        path('dynamic_routing/<str:name>', views.dynamic_routing, name="dynamic-routing"),
+    ]
+
+
+We Run the server and we have our page up and running.
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ python manage.py runserver
+    Watching for file changes with StatReloader
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+    April 30, 2022 - 18:37:41
+    Django version 3.2.13, using settings 'tweetmetoo.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CTRL-BREAK.
+    [30/Apr/2022 18:37:44] "GET / HTTP/1.1" 200 23
+    Not Found: /favicon.ico
+    [30/Apr/2022 18:37:44] "GET /favicon.ico HTTP/1.1" 404 2232
+
+
+
 0:47:57 11. Handling Dynamic Routing
 ------------------------------------
 
