@@ -400,7 +400,11 @@ We Run the server and we have our page up and running.
 0:47:57 11. Handling Dynamic Routing
 ------------------------------------
 
-There are the changes within the git repository
+
+
+
+
+
 
 0:51:32 12. Dynamic View into REST API Endpoint
 -----------------------------------------------
@@ -428,13 +432,6 @@ The only file we made some changes was views.py
         REST API VIEW
         return json data
         Consume by JavaScript or Swift or Java or iOS/Android
-        :param request: _description_
-        :type request: _type_
-        :param tweet_id: _description_
-        :type tweet_id: _type_
-        :raises Http404: _description_
-        :return: _description_
-        :rtype: _type_
         """
         
         data = {
