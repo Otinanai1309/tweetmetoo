@@ -38,6 +38,7 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinxcontrib.httpdomain',
     'sphinx_copybutton',
+    'sphinx_toolbox.collapse',
 ]
 
 autosummary_generate = True

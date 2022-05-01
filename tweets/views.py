@@ -6,7 +6,7 @@ from tweets.models import Tweet # or simpler from .models import Tweet (same dir
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    return HttpResponse("<h1>Hello world!!!</h1>")
+    return render(request, "pages/home.html", context={}, status=200)
 
 def tweet_detail_view(request, pk):
     """
