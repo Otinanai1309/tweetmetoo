@@ -2,10 +2,38 @@
 
 
 {% block head_title %}
-   Tweet me too
+   <title>Tweet me too</title>
 {% endblock head_title %}
 
 
 {% block content %}
-    <h1> welcome to twetmetoo</h1>
+   <h1> welcome to twetmetoo</h1>
+
+   <div id="tweets">
+      Replace me with something
+   </div>
+
+<!--Script tag allows me to type javascript inside html-->
+<script>
+   const tweetsElement = document.getElementById('tweets')  // get html elements
+   tweetsElement.innerHTML = 'Loading tweets'               // set new html content in that element 
+
+
+
+   const xhr = new XMLHttpRequest() 
+   const method = "GET" //"POST"
+   const url = "/tweets"
+   const responseType = "json"
+
+   // Now i can perform the request 
+   xhr.responseType =responseType
+   xhr.open(method, url)
+   xhr.onload = function() {
+      console.log(xhr.response)
+      const serverResponse = xhr.response
+      var listedItems = serverResponse.response  //response is the key from the data directory
+      console.log(listedItems)
+   }
+   xhr.send() // triggers the request for me
+</script>
 {% endblock content %}

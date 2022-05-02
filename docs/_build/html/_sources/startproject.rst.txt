@@ -674,8 +674,9 @@ We take from getbootstrap page the starter template and copy it there
     </html>
 
 
-.. code-block:: html
-    :emphasize-lines: 1
+.. code-block:: HTML
+    :caption: the home page :file: 'pages/home.html'
+    :emphasize-lines: 1 
 
     <!-- pages/home.html -->
     {% extends 'base.html' %}
@@ -689,3 +690,89 @@ We take from getbootstrap page the starter template and copy it there
     {% block content %}
         <h1> welcome to twetmetoo</h1>
     {% endblock content %}
+
+
+1:04:17 15. Tweet List View
+---------------------------
+
+The django template system is good just for reducing html code we have to write.
+So we don't have to violate the DRY concept (Don't Repeat Yourself).
+
+
+.. collapse:: views file with a new function
+
+    .. code-block:: python
+        :caption: a new function within tweets.views.py
+        :emphasize-lines: 1,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38
+
+        # tweets/views.py
+        from django.http import Http404, HttpResponse, JsonResponse
+        from django.shortcuts import render
+        import pkg_resources
+        from requests import request
+
+        from tweets.models import Tweet # or simpler from .models import Tweet (same directory)
+
+        # Create your views here.
+        def home_view(request, *args, **kwargs):
+            return render(request, "pages/home.html", context={}, status=200)
+
+        def tweet_list_view(request, *args, **kwargs):
+            """
+            REST API VIEW
+            return json data
+            Consume by JavaScript or Swift or Java or iOS/Android
+            """
+            qs = Tweet.objects.all()
+            # My approach witch by the way i think is simpler    
+            for tweet in qs:
+                data = {
+                    'id': tweet.id,
+                    'content': tweet.content,
+                }
+            # Or another way to tacle this:
+            tweets_list = []
+            # with 1 or many lines 
+            # tweet_list = [{"id": x.id, "content": x.content} for x in qs]
+            for tweet in qs:
+                tweets_list.append({
+                    'id': tweet.id,
+                    'content': tweet.content,
+                })
+            data = {
+                "response": tweets_list
+            }
+            return JsonResponse(data, status=200)
+
+        def tweet_detail_view(request, pk):
+            """
+            REST API VIEW
+            return json data
+            Consume by JavaScript or Swift or Java or iOS/Android
+            """
+            data ={
+                "pk": pk,
+                # "image_path": obj.image.url
+            } 
+            status = 200
+            
+            try:
+                obj = Tweet.objects.get(pk=pk)
+                data['content'] = obj.content
+            except:
+                data['message'] = "Not found"
+                status = 404
+                
+
+            
+            return JsonResponse(data, status=status)
+
+        def dynamic_routing(request, name, *args, **kwargs):
+            return HttpResponse(f"<h1> Hello {name}. Have a nice day")       
+
+
+
+1:08:01 16. Dynamic Load Tweets via JavaScript
+----------------------------------------------
+
+

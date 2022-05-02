@@ -49,6 +49,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#dynamic-view-into-rest-api-endpoint">0:51:32 12. Dynamic View into REST API Endpoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#our-first-template">0:55:50 13. Our First Template</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bootstrap-django-templates">1:00:07 14. Bootstrap &amp; Django Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tweet-list-view">1:04:17 15. Tweet List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-load-tweets-via-javascript">1:08:01 16. Dynamic Load Tweets via JavaScript</a></li>
 </ul>
 </li>
 </ul>
@@ -673,7 +675,9 @@ create a home.html page. The way to use this new page is:</p>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="cm">&lt;!-- pages/home.html --&gt;</span>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">the home page :file: ‘pages/home.html’</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-HTML notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="cm">&lt;!-- pages/home.html --&gt;</span>
 </span>{% extends &#39;base.html&#39; %}
 
 
@@ -687,6 +691,85 @@ Tweet me too
 {% endblock content %}
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="tweet-list-view">
+<h2>1:04:17 15. Tweet List View<a class="headerlink" href="#tweet-list-view" title="Permalink to this headline"></a></h2>
+<p>The django template system is good just for reducing html code we have to write.
+So we don’t have to violate the DRY concept (Don’t Repeat Yourself).</p>
+<details class="summary-views-file-with-a-new-function">
+<summary>views file with a new function</summary><div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">a new function within tweets.views.py</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="c1"># tweets/views.py</span>
+</span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">request</span>
+
+<span class="kn">from</span> <span class="nn">tweets.models</span> <span class="kn">import</span> <span class="n">Tweet</span> <span class="c1"># or simpler from .models import Tweet (same directory)</span>
+
+<span class="c1"># Create your views here.</span>
+<span class="k">def</span> <span class="nf">home_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;pages/home.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{},</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tweet_list_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    REST API VIEW</span>
+<span class="sd">    return json data</span>
+<span class="sd">    Consume by JavaScript or Swift or Java or iOS/Android</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qs</span> <span class="o">=</span> <span class="n">Tweet</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="c1"># My approach witch by the way i think is simpler</span>
+<span class="hll">    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">qs</span><span class="p">:</span>
+</span><span class="hll">        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="hll">            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+</span><span class="hll">            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+</span><span class="hll">        <span class="p">}</span>
+</span><span class="hll">    <span class="c1"># Or another way to tacle this:</span>
+</span><span class="hll">    <span class="n">tweets_list</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="hll">    <span class="c1"># with 1 or many lines</span>
+</span><span class="hll">    <span class="c1"># tweet_list = [{&quot;id&quot;: x.id, &quot;content&quot;: x.content} for x in qs]</span>
+</span><span class="hll">    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">qs</span><span class="p">:</span>
+</span><span class="hll">        <span class="n">tweets_list</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span class="hll">            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+</span><span class="hll">            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+</span><span class="hll">        <span class="p">})</span>
+</span><span class="hll">    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="hll">        <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">tweets_list</span>
+</span><span class="hll">    <span class="p">}</span>
+</span><span class="hll">    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</span>
+<span class="k">def</span> <span class="nf">tweet_detail_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    REST API VIEW</span>
+<span class="sd">    return json data</span>
+<span class="sd">    Consume by JavaScript or Swift or Java or iOS/Android</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;pk&quot;</span><span class="p">:</span> <span class="n">pk</span><span class="p">,</span>
+        <span class="c1"># &quot;image_path&quot;: obj.image.url</span>
+    <span class="p">}</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="mi">200</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Tweet</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">content</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Not found&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="mi">404</span>
+
+
+
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dynamic_routing</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;h1&gt; Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">. Have a nice day&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details></div>
+<div class="section" id="dynamic-load-tweets-via-javascript">
+<h2>1:08:01 16. Dynamic Load Tweets via JavaScript<a class="headerlink" href="#dynamic-load-tweets-via-javascript" title="Permalink to this headline"></a></h2>
 </div>
 </div>
 
