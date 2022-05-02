@@ -1037,3 +1037,7 @@ Within home.html i add a script tag to put inside javascript.
         xhr.send() // triggers the request for me
         </script>
         {% endblock content %}
+
+
+1:36:48 21. Rapid Implement of Bootstrap Theme
+----------------------------------------------

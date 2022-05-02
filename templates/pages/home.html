@@ -7,11 +7,18 @@
 
 
 {% block content %}
-   <h1> welcome to tweet me too</h1>
 
-   <div id="tweets">
-      Wait loading tweets....
+   <div class='row text-center'>
+      <div class="col">
+         <h1> welcome to tweet me too</h1>
+      </div>
+   </div>   
+   
+   
+   <div class="row" id="tweets">
+         
    </div>
+   
 
 <!--Script tag allows me to type javascript inside html-->
 <script>
@@ -45,7 +52,7 @@
    function formatTweetElement(tweet){
       var formattedTweet = `
       <div 
-         class='mb-4 tweet' 
+         class='col-12 col-md-10 mx-auto mb-4 border rounded py-3 tweet' 
          id= "'tweet-' ${tweet.id}"
       >
          <p>  
