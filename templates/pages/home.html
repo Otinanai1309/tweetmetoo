@@ -7,16 +7,16 @@
 
 
 {% block content %}
-   <h1> welcome to twetmetoo</h1>
+   <h1> welcome to tweet me too</h1>
 
    <div id="tweets">
-      Replace me with something
+      Wait loading tweets....
    </div>
 
 <!--Script tag allows me to type javascript inside html-->
 <script>
    const tweetsElement = document.getElementById('tweets')  // get html elements
-   tweetsElement.innerHTML = 'Loading tweets'               // set new html content in that element 
+   // tweetsElement.innerHTML = `Wait loading tweets....   <br><br>`              // set new html content in that element 
 
 
 
@@ -25,14 +25,59 @@
    const url = "/tweets"
    const responseType = "json"
 
+   function handleDidLike(tweet_id, currentCount) {
+      console.log(tweet_id, currentCount)
+      
+   }
+
+   function likeBtn(tweet) {
+      return `
+      <button 
+         type='button' 
+         class='btn btn-primary btn-small' 
+         onclick= handleDidLike(${tweet.id}, ${tweet.likes})
+      >
+      ${tweet.likes} Likes
+      </button>
+   `
+   }
+
+   function formatTweetElement(tweet){
+      var formattedTweet = `
+      <div 
+         class='mb-4 tweet' 
+         id= "'tweet-' ${tweet.id}"
+      >
+         <p>  
+            ${tweet.content} 
+         </p>
+         <div 
+            class='btn-group'
+         > 
+            ${likeBtn(tweet)}
+         </div>
+      </div>
+      `
+
+      return formattedTweet
+   }
+
    // Now i can perform the request 
    xhr.responseType =responseType
    xhr.open(method, url)
    xhr.onload = function() {
-      console.log(xhr.response)
+      // console.log(xhr.response)
       const serverResponse = xhr.response
-      var listedItems = serverResponse.response  //response is the key from the data directory
-      console.log(listedItems)
+      const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
+      var finalTweetStr = ""
+      var i;
+      for (i=0; i<listedItems.length; i++) {
+         var tweetobj = listedItems[i]   
+         var currentItem = formatTweetElement(tweetobj)     
+         finalTweetStr += currentItem
+         
+      }
+      tweetsElement.innerHTML += finalTweetStr
    }
    xhr.send() // triggers the request for me
 </script>

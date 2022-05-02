@@ -817,6 +817,223 @@ Within home.html i add a script tag to put inside javascript.
     {% endblock content %}
 
 
-1:13:48 17. Replace HTML Content with JavaScript
-------------------------------------------------
+1:18:19 18. Tweets to HTML via JavaScript
+-----------------------------------------
 
+.. collapse:: reveal home.html file
+
+    .. code-block:: html
+        :emphasize-lines: 1
+
+        <!-- pages/home.html -->
+        {% extends 'base.html' %}
+
+
+        {% block head_title %}
+        <title>Tweet me too</title>
+        {% endblock head_title %}
+
+
+        {% block content %}
+        <h1> welcome to twetmetoo</h1>
+
+        <div id="tweets">
+            Replace me with something
+        </div>
+
+        <!--Script tag allows me to type javascript inside html-->
+        <script>
+        const tweetsElement = document.getElementById('tweets')  // get html elements
+        // tweetsElement.innerHTML = `Wait loading tweets....   <br><br>`              // set new html content in that element 
+
+
+
+        const xhr = new XMLHttpRequest() 
+        const method = "GET" //"POST"
+        const url = "/tweets"
+        const responseType = "json"
+
+        // Now i can perform the request 
+        xhr.responseType =responseType
+        xhr.open(method, url)
+        xhr.onload = function() {
+            console.log(xhr.response)
+            const serverResponse = xhr.response
+            const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
+            var finalTweetStr = ""
+            var i;
+            for (i=0; i<listedItems.length; i++) {
+                console.log(i)
+                console.log(listedItems[i])
+                var currentItem = "<div class='mb-4'><h1>" + listedItems[i].id + "</h1>" + "<p>" + listedItems[i].content + "</p></div>"
+                finalTweetStr += currentItem
+                
+            }
+            tweetsElement.innerHTML += finalTweetStr
+        }
+        xhr.send() // triggers the request for me
+        </script>
+        {% endblock content %}
+
+
+
+1:25:56 19. Format Tweet Method
+-------------------------------
+
+.. collapse:: reveal home.html file
+
+    .. code-block:: html
+        :emphasize-lines: 1
+
+        <!-- pages/home.html -->
+        {% extends 'base.html' %}
+
+
+        {% block head_title %}
+        <title>Tweet me too</title>
+        {% endblock head_title %}
+
+
+        {% block content %}
+        <h1> welcome to twetmetoo</h1>
+
+        <div id="tweets">
+            Replace me with something
+        </div>
+
+        <!--Script tag allows me to type javascript inside html-->
+        <script>
+        const tweetsElement = document.getElementById('tweets')  // get html elements
+        // tweetsElement.innerHTML = `Wait loading tweets....   <br><br>`              // set new html content in that element 
+
+
+
+        const xhr = new XMLHttpRequest() 
+        const method = "GET" //"POST"
+        const url = "/tweets"
+        const responseType = "json"
+
+        function formatTweetElement(tweet){
+            var formattedTweet = `<div class='mb-4 tweet' id= '"tweet-" + ${tweet.id}'><p>  ${tweet.content}  </p></div>`
+
+            return formattedTweet
+        }
+
+        // Now i can perform the request 
+        xhr.responseType =responseType
+        xhr.open(method, url)
+        xhr.onload = function() {
+            console.log(xhr.response)
+            const serverResponse = xhr.response
+            const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
+            var finalTweetStr = ""
+            var i;
+            for (i=0; i<listedItems.length; i++) {
+                var tweetobj = listedItems[i]   
+                var currentItem = formatTweetElement(tweetobj)     
+                finalTweetStr += currentItem
+                
+            }
+            tweetsElement.innerHTML += finalTweetStr
+        }
+        xhr.send() // triggers the request for me
+        </script>
+        {% endblock content %}
+
+
+
+1:29:30 20. Like Button Rendering
+---------------------------------
+
+
+.. collapse:: reveal home.html file
+
+    .. code-block:: html
+        :emphasize-lines: 1
+
+        <!-- pages/home.html -->
+
+        {% extends 'base.html' %}
+
+
+        {% block head_title %}
+        <title>Tweet me too</title>
+        {% endblock head_title %}
+
+
+        {% block content %}
+        <h1> welcome to tweet me too</h1>
+
+        <div id="tweets">
+            Wait loading tweets....
+        </div>
+
+        <!--Script tag allows me to type javascript inside html-->
+        <script>
+        const tweetsElement = document.getElementById('tweets')  // get html elements
+        // tweetsElement.innerHTML = `Wait loading tweets....   <br><br>`              // set new html content in that element 
+
+
+
+        const xhr = new XMLHttpRequest() 
+        const method = "GET" //"POST"
+        const url = "/tweets"
+        const responseType = "json"
+
+        function handleDidLike(tweet_id, currentCount) {
+            console.log(tweet_id, currentCount)
+            
+        }
+
+        function likeBtn(tweet) {
+            return `
+            <button 
+                type='button' 
+                class='btn btn-primary btn-small' 
+                onclick= handleDidLike(${tweet.id}, ${tweet.likes})
+            >
+            ${tweet.likes} Likes
+            </button>
+        `
+        }
+
+        function formatTweetElement(tweet){
+            var formattedTweet = `
+            <div 
+                class='mb-4 tweet' 
+                id= "'tweet-' ${tweet.id}"
+            >
+                <p>  
+                    ${tweet.content} 
+                </p>
+                <div 
+                    class='btn-group'
+                > 
+                    ${likeBtn(tweet)}
+                </div>
+            </div>
+            `
+
+            return formattedTweet
+        }
+
+        // Now i can perform the request 
+        xhr.responseType =responseType
+        xhr.open(method, url)
+        xhr.onload = function() {
+            // console.log(xhr.response)
+            const serverResponse = xhr.response
+            const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
+            var finalTweetStr = ""
+            var i;
+            for (i=0; i<listedItems.length; i++) {
+                var tweetobj = listedItems[i]   
+                var currentItem = formatTweetElement(tweetobj)     
+                finalTweetStr += currentItem
+                
+            }
+            tweetsElement.innerHTML += finalTweetStr
+        }
+        xhr.send() // triggers the request for me
+        </script>
+        {% endblock content %}

@@ -5,6 +5,8 @@ from requests import request
 
 from tweets.models import Tweet # or simpler from .models import Tweet (same directory)
 
+import random
+
 # Create your views here.
 def home_view(request, *args, **kwargs):
     return render(request, "pages/home.html", context={}, status=200)
@@ -30,6 +32,7 @@ def tweet_list_view(request, *args, **kwargs):
         tweets_list.append({
             'id': tweet.id,
             'content': tweet.content,
+            'likes': random.randint(0, 1459)
         })
     data = {
         "response": tweets_list

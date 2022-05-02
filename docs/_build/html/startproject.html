@@ -51,6 +51,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#bootstrap-django-templates">1:00:07 14. Bootstrap &amp; Django Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tweet-list-view">1:04:17 15. Tweet List View</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dynamic-load-tweets-via-javascript">1:08:01 16. Dynamic Load Tweets via JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tweets-to-html-via-javascript">1:18:19 18. Tweets to HTML via JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-tweet-method">1:25:56 19. Format Tweet Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#like-button-rendering">1:29:30 20. Like Button Rendering</a></li>
 </ul>
 </li>
 </ul>
@@ -770,6 +773,127 @@ So we don’t have to violate the DRY concept (Don’t Repeat Yourself).</p>
 </details></div>
 <div class="section" id="dynamic-load-tweets-via-javascript">
 <h2>1:08:01 16. Dynamic Load Tweets via JavaScript<a class="headerlink" href="#dynamic-load-tweets-via-javascript" title="Permalink to this headline"></a></h2>
+<p>Now in order to load to my home page all the data that localhost/tweets endpoint has
+we have to use javascript.</p>
+<p>Within home.html i add a script tag to put inside javascript.</p>
+</div>
+<div class="section" id="tweets-to-html-via-javascript">
+<h2>1:18:19 18. Tweets to HTML via JavaScript<a class="headerlink" href="#tweets-to-html-via-javascript" title="Permalink to this headline"></a></h2>
+<details class="summary-reveal-home-html-file">
+<summary>reveal home.html file</summary><div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="cm">&lt;!-- pages/home.html --&gt;</span>
+</span>{% extends &#39;base.html&#39; %}
+
+
+{% block head_title %}
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Tweet me too<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+{% endblock head_title %}
+
+
+{% block content %}
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span> welcome to twetmetoo<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tweets&quot;</span><span class="p">&gt;</span>
+    Replace me with something
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="cm">&lt;!--Script tag allows me to type javascript inside html--&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tweetsElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;tweets&#39;</span><span class="p">)</span><span class="w">  </span><span class="c1">// get html elements</span><span class="w"></span>
+<span class="c1">// tweetsElement.innerHTML = `Wait loading tweets....   &lt;br&gt;&lt;br&gt;`              // set new html content in that element</span><span class="w"></span>
+
+
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">xhr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">XMLHttpRequest</span><span class="p">()</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="w"> </span><span class="c1">//&quot;POST&quot;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/tweets&quot;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">responseType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="w"></span>
+
+<span class="c1">// Now i can perform the request</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span><span class="w"> </span><span class="o">=</span><span class="nx">responseType</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">)</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">serverResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">listedItems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">serverResponse</span><span class="p">.</span><span class="nx">response</span><span class="w">  </span><span class="c1">// array (python list), response is the key that contains a list from the data dictionairy</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">finalTweetStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">listedItems</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">listedItems</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span><span class="w"></span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">currentItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;div class=&#39;mb-4&#39;&gt;&lt;h1&gt;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">listedItems</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&lt;/h1&gt;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&lt;p&gt;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">listedItems</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">content</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&lt;/p&gt;&lt;/div&gt;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nx">finalTweetStr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">currentItem</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">tweetsElement</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">finalTweetStr</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span><span class="w"> </span><span class="c1">// triggers the request for me</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{% endblock content %}
+</pre></div>
+</div>
+</details></div>
+<div class="section" id="format-tweet-method">
+<h2>1:25:56 19. Format Tweet Method<a class="headerlink" href="#format-tweet-method" title="Permalink to this headline"></a></h2>
+<details class="summary-reveal-home-html-file">
+<summary>reveal home.html file</summary><div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="cm">&lt;!-- pages/home.html --&gt;</span>
+</span>{% extends &#39;base.html&#39; %}
+
+
+{% block head_title %}
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Tweet me too<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+{% endblock head_title %}
+
+
+{% block content %}
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span> welcome to twetmetoo<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tweets&quot;</span><span class="p">&gt;</span>
+    Replace me with something
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="cm">&lt;!--Script tag allows me to type javascript inside html--&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tweetsElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;tweets&#39;</span><span class="p">)</span><span class="w">  </span><span class="c1">// get html elements</span><span class="w"></span>
+<span class="c1">// tweetsElement.innerHTML = `Wait loading tweets....   &lt;br&gt;&lt;br&gt;`              // set new html content in that element</span><span class="w"></span>
+
+
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">xhr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">XMLHttpRequest</span><span class="p">()</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="w"> </span><span class="c1">//&quot;POST&quot;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/tweets&quot;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">responseType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="w"></span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">formatTweetElement</span><span class="p">(</span><span class="nx">tweet</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">formattedTweet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`&lt;div class=&#39;mb-4 tweet&#39; id= &#39;&quot;tweet-&quot; + </span><span class="si">${</span><span class="nx">tweet</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">&#39;&gt;&lt;p&gt;  </span><span class="si">${</span><span class="nx">tweet</span><span class="p">.</span><span class="nx">content</span><span class="si">}</span><span class="sb">  &lt;/p&gt;&lt;/div&gt;`</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">formattedTweet</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// Now i can perform the request</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span><span class="w"> </span><span class="o">=</span><span class="nx">responseType</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">)</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">serverResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">listedItems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">serverResponse</span><span class="p">.</span><span class="nx">response</span><span class="w">  </span><span class="c1">// array (python list), response is the key that contains a list from the data dictionairy</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">finalTweetStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">listedItems</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">tweetobj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">listedItems</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">currentItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">formatTweetElement</span><span class="p">(</span><span class="nx">tweetobj</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nx">finalTweetStr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">currentItem</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">tweetsElement</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">finalTweetStr</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span><span class="w"> </span><span class="c1">// triggers the request for me</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{% endblock content %}
+</pre></div>
+</div>
+</details></div>
+<div class="section" id="like-button-rendering">
+<h2>1:29:30 20. Like Button Rendering<a class="headerlink" href="#like-button-rendering" title="Permalink to this headline"></a></h2>
 </div>
 </div>
 
