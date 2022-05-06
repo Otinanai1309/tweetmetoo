@@ -955,7 +955,6 @@ Within home.html i add a script tag to put inside javascript.
 
         {% extends 'base.html' %}
 
-
         {% block head_title %}
         <title>Tweet me too</title>
         {% endblock head_title %}
@@ -970,13 +969,10 @@ Within home.html i add a script tag to put inside javascript.
 
         <!--Script tag allows me to type javascript inside html-->
         <script>
-        const tweetsElement = document.getElementById('tweets')  // get html elements
-        // tweetsElement.innerHTML = `Wait loading tweets....   <br><br>`              // set new html content in that element 
-
-
-
+        const tweetsElement = document.getElementById('tweets')  
+        
         const xhr = new XMLHttpRequest() 
-        const method = "GET" //"POST"
+        const method = "GET" 
         const url = "/tweets"
         const responseType = "json"
 
@@ -1013,17 +1009,14 @@ Within home.html i add a script tag to put inside javascript.
                 </div>
             </div>
             `
-
             return formattedTweet
         }
 
-        // Now i can perform the request 
         xhr.responseType =responseType
         xhr.open(method, url)
         xhr.onload = function() {
-            // console.log(xhr.response)
             const serverResponse = xhr.response
-            const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
+            const listedItems = serverResponse.response  
             var finalTweetStr = ""
             var i;
             for (i=0; i<listedItems.length; i++) {
@@ -1034,10 +1027,162 @@ Within home.html i add a script tag to put inside javascript.
             }
             tweetsElement.innerHTML += finalTweetStr
         }
-        xhr.send() // triggers the request for me
+        xhr.send() 
         </script>
         {% endblock content %}
 
 
-1:36:48 21. Rapid Implement of Bootstrap Theme
-----------------------------------------------
+1:48:00 22. Tweet Create Form
+-----------------------------
+
+
+.. code-block:: python
+    :caption: 'tweets/forms.py'
+    :emphasize-lines: 1
+
+    # tweets/forms.py
+    from dataclasses import fields
+    from pyexpat import model
+    from unittest.util import _MAX_LENGTH
+    from django import forms
+
+    from .models import Tweet
+
+    MAX_TWEET_LENGTH = 240
+
+    class TweetForm(forms.ModelForm):
+        
+        # declare actual form
+        class Meta:
+            model = Tweet
+            fields = ['content']
+            
+        def clean_content(self):
+            content = self.cleaned_data.get("content")
+            if len(content) > MAX_TWEET_LENGTH:
+                raise forms.ValidationError("Thiw tweet is too long")
+            return content
+    
+
+.. collapse:: reveal views.py file
+
+    .. code-block:: python
+        :caption: tweets/views.py
+        :emphasize-lines: 1,18,19,20,21,22,23,24,25
+
+        # tweets/views.py
+        from django.http import Http404, HttpResponse, JsonResponse
+        from django.shortcuts import render
+        # import pkg_resources
+        from requests import request
+
+
+        from .forms import TweetForm
+        from tweets.models import Tweet # or simpler from .models import Tweet (same directory)
+
+        import random
+
+        # Create your views here.
+        def home_view(request, *args, **kwargs):
+            return render(request, "pages/home.html", context={}, status=200)
+
+
+        def tweet_create_view(request, *args, **kwargs):
+            form = TweetForm(request.POST or None)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                # do other form related logic
+                obj.save()
+                form = TweetForm() # reinitialize a new blank form
+            return render(request, 'components/form.html', context={"form": form}, status=200)
+
+
+        def tweet_list_view(request, *args, **kwargs):
+            """
+            REST API VIEW
+            return json data
+            Consume by JavaScript or Swift or Java or iOS/Android
+            """
+            qs = Tweet.objects.all()
+            # My approach witch by the way i think is simpler    
+            for tweet in qs:
+                data = {
+                    'id': tweet.id,
+                    'content': tweet.content,
+                }
+            # Or another way to tacle this:
+            tweets_list = []
+            # with 1 or many lines 
+            # tweet_list = [{"id": x.id, "content": x.content} for x in qs]
+            for tweet in qs:
+                tweets_list.append({
+                    'id': tweet.id,
+                    'content': tweet.content,
+                    'likes': random.randint(0, 1459)
+                })
+            data = {
+                "response": tweets_list
+            }
+            return JsonResponse(data, status=200)
+
+        def tweet_detail_view(request, pk):
+            """
+            REST API VIEW
+            return json data
+            Consume by JavaScript or Swift or Java or iOS/Android
+            """
+            data ={
+                "pk": pk,
+                # "image_path": obj.image.url
+            } 
+            status = 200
+            
+            try:
+                obj = Tweet.objects.get(pk=pk)
+                data['content'] = obj.content
+            except:
+                data['message'] = "Not found"
+                status = 404
+                
+
+            
+            return JsonResponse(data, status=status)
+
+        def dynamic_routing(request, name, *args, **kwargs):
+            return HttpResponse(f"<h1> Hello {name}. Have a nice day")       
+
+
+
+.. code-block:: html
+    :caption: 'templates/components/form.html'
+    :emphasize-lines: 1
+
+    <!--templates/components/form.html-->
+    <form method='POST'> {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit' class='btn btn-secondary'>Save</button>
+    </form>
+
+
+.. code-block:: python
+    :caption: 'tweets/urls.py'
+    :emphasize-lines: 1,8
+
+    # tweets/urls.py
+    from django.contrib import admin
+    from django.urls import path
+    from tweets import views
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', views.home_view, name = 'home-view'),
+        path('create_tweet/', views.tweet_create_view, name="create-tweet-view"),
+        path('tweets/', views.tweet_list_view, name="tweet-list-view"),
+        path('tweets_detail/<int:pk>', views.tweet_detail_view, name="tweet-detail-view"),
+        path('dynamic_routing/<str:name>', views.dynamic_routing, name="dynamic-routing"),
+    ]
+
+
+1:56:55 23. Tweet Form by Hand
+------------------------------
+
