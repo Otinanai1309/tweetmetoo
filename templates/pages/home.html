@@ -42,10 +42,13 @@
       const method = myForm.getAttribute("method")
       const xhr = new XMLHttpRequest()
       xhr.open(method, url)
+      xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", 'XMLHttpRequest')
+      xhr.setRequestHeader("x-requested-with", "XMLHttpRequest")
       xhr.onload = function() {
          const serverResponse = xhr.response
          const tweetsEl = document.getElementById('tweets')
          loadTweets(tweetsEl)
+         console.log(serverResponse)
       }
       xhr.send(myFormData)
    }

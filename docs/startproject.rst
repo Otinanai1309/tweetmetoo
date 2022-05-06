@@ -1183,6 +1183,9 @@ Within home.html i add a script tag to put inside javascript.
     ]
 
 
-1:56:55 23. Tweet Form by Hand
-------------------------------
+2:26:47 29. Serialize Django Model Object
+-----------------------------------------
+
+
+
 

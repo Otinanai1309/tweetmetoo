@@ -1,3 +1,4 @@
+import json
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -20,6 +21,7 @@ def home_view(request, *args, **kwargs):
 
 
 def tweet_create_view(request, *args, **kwargs):
+    # print("ajax:", request.headers.get('x-requested-with') == 'XMLHttpRequest') 
     form = TweetForm(request.POST or None)
     print('post data is:', request.POST)
     next_url = request.POST.get("next") or None
@@ -28,6 +30,9 @@ def tweet_create_view(request, *args, **kwargs):
         obj = form.save(commit=False)
         # do other form related logic
         obj.save()
+        if request.is_ajax():
+            return JsonResponse({}, status=201)  # 201 is typically for created items
+        
         if next_url != None and is_safe_url(next_url, ALLOWED_HOSTS):
             return redirect(next_url)
         
