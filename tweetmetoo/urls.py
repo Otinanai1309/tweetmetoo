@@ -20,6 +20,7 @@ from tweets import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name = 'home-view'),
+    path('create_tweet/', views.tweet_create_view, name="tweet-create-view"),
     path('tweets/', views.tweet_list_view, name="tweet-list-view"),
     path('tweets_detail/<int:pk>', views.tweet_detail_view, name="tweet-detail-view"),
     path('dynamic_routing/<str:name>', views.dynamic_routing, name="dynamic-routing"),

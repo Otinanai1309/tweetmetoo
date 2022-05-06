@@ -22,9 +22,7 @@
 
 <!--Script tag allows me to type javascript inside html-->
 <script>
-   const tweetsElement = document.getElementById('tweets')  // get html elements
-   // tweetsElement.innerHTML = `Wait loading tweets....   <br><br>`              // set new html content in that element 
-
+   const tweetsElement = document.getElementById('tweets') 
 
 
    const xhr = new XMLHttpRequest() 
@@ -34,7 +32,6 @@
 
    function handleDidLike(tweet_id, currentCount) {
       console.log(tweet_id, currentCount)
-      
    }
 
    function likeBtn(tweet) {
