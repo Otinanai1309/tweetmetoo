@@ -16,7 +16,7 @@
    
    <div class="row mb-3">
       <div class='col-md-4 mx-auto col-10'>
-         <form class='form' method='POST' action='create_tweet/'>
+         <form class='form' id='tweet-create-form' method='POST' action='/create_tweet/'>
             {% csrf_token %}
             <input type='hidden' value='/' name='next' />
             <textarea class='form-control' name='content' placeholder='Your tweet ...'></textarea>
@@ -33,13 +33,57 @@
 
 <!--Script tag allows me to type javascript inside html-->
 <script>
-   const tweetsElement = document.getElementById('tweets') 
+
+   function handleTweetCreateFormDidSubmit(event) {
+      event.preventDefault()
+      const myForm = event.target
+      const myFormData = new FormData(myForm)  //FormData is a builtIn class handling data from an http form
+      const url = myForm.getAttribute("action")
+      const method = myForm.getAttribute("method")
+      const xhr = new XMLHttpRequest()
+      xhr.open(method, url)
+      xhr.onload = function() {
+         const serverResponse = xhr.response
+         const tweetsEl = document.getElementById('tweets')
+         loadTweets(tweetsEl)
+      }
+      xhr.send(myFormData)
+   }
+   const tweetCreateFormEl = document.getElementById('tweet-create-form')
+
+   tweetCreateFormEl.addEventListener('submit', handleTweetCreateFormDidSubmit)
 
 
-   const xhr = new XMLHttpRequest() 
-   const method = "GET" //"POST"
-   const url = "/tweets"
-   const responseType = "json"
+   const tweetsEl = document.getElementById('tweets') 
+
+   const loadTweets = function(tweetsElement) {
+      const xhr = new XMLHttpRequest() 
+      const method = "GET" //"POST"
+      const url = "/tweets"
+      const responseType = "json"
+
+      // Now i can perform the request 
+      xhr.responseType =responseType
+      xhr.open(method, url)
+      xhr.onload = function() {
+         // console.log(xhr.response)
+         const serverResponse = xhr.response
+         const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
+         var finalTweetStr = ""
+         var i;
+         for (i=0; i<listedItems.length; i++) {
+            var tweetobj = listedItems[i]   
+            var currentItem = formatTweetElement(tweetobj)     
+            finalTweetStr += currentItem
+            
+         }
+         tweetsElement.innerHTML += finalTweetStr
+      }
+      xhr.send() // triggers the request for me
+   }
+   
+   loadTweets(tweetsEl)
+
 
    function handleDidLike(tweet_id, currentCount) {
       console.log(tweet_id, currentCount)
@@ -77,23 +121,6 @@
       return formattedTweet
    }
 
-   // Now i can perform the request 
-   xhr.responseType =responseType
-   xhr.open(method, url)
-   xhr.onload = function() {
-      // console.log(xhr.response)
-      const serverResponse = xhr.response
-      const listedItems = serverResponse.response  // array (python list), response is the key that contains a list from the data dictionairy
-      var finalTweetStr = ""
-      var i;
-      for (i=0; i<listedItems.length; i++) {
-         var tweetobj = listedItems[i]   
-         var currentItem = formatTweetElement(tweetobj)     
-         finalTweetStr += currentItem
-         
-      }
-      tweetsElement.innerHTML += finalTweetStr
-   }
-   xhr.send() // triggers the request for me
+   
 </script>
 {% endblock content %}
