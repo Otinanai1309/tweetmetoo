@@ -19,7 +19,7 @@
          <form class='form' id='tweet-create-form' method='POST' action='/create_tweet/'>
             {% csrf_token %}
             <input type='hidden' value='/' name='next' />
-            <textarea class='form-control' name='content' placeholder='Your tweet ...'></textarea>
+            <textarea required='required'  class='form-control' name='content' placeholder='Your tweet ...'></textarea>
             <button type="submit" class="btn btn-primary">Tweet</button>
          
          </form>
@@ -50,9 +50,10 @@
          if (xhr.status === 201) {
             const newTweet = xhr.response
             // const newTweetJson = JSON.parse(newTweet)
-            console.log(newTweetJson.likes)
             const newTweetElement = formatTweetElement(newTweet)
-            console.log(newTweetElement)
+            const ogHtml = tweetsContainerElement.innerHTML
+            tweetsContainerElement.innerHTML = newTweetElement + ogHtml
+            myForm.reset()  // deletes the message that just tweeted 
          }
          
       }

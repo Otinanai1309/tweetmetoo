@@ -1187,5 +1187,6 @@ Within home.html i add a script tag to put inside javascript.
 -----------------------------------------
 
 
-stoped at 2:31
+2:33:33 30. Append New Tweet & Reorder
+--------------------------------------
 
