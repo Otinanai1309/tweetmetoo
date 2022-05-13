@@ -41,14 +41,20 @@
       const url = myForm.getAttribute("action")
       const method = myForm.getAttribute("method")
       const xhr = new XMLHttpRequest()
+      const responseType = "json"   // added these 2 lines in order not to use JSON.parse(newTweet) inbuild function (line 52)
+      xhr.responseType = responseType
       xhr.open(method, url)
       xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", 'XMLHttpRequest')
       xhr.setRequestHeader("x-requested-with", "XMLHttpRequest")
       xhr.onload = function() {
-         const serverResponse = xhr.response
-         const tweetsEl = document.getElementById('tweets')
-         loadTweets(tweetsEl)
-         console.log(serverResponse)
+         if (xhr.status === 201) {
+            const newTweet = xhr.response
+            // const newTweetJson = JSON.parse(newTweet)
+            console.log(newTweetJson.likes)
+            const newTweetElement = formatTweetElement(newTweet)
+            console.log(newTweetElement)
+         }
+         
       }
       xhr.send(myFormData)
    }
@@ -57,7 +63,7 @@
    tweetCreateFormEl.addEventListener('submit', handleTweetCreateFormDidSubmit)
 
 
-   const tweetsEl = document.getElementById('tweets') 
+   const tweetsContainerElement = document.getElementById('tweets') 
 
    const loadTweets = function(tweetsElement) {
       const xhr = new XMLHttpRequest() 
@@ -85,7 +91,7 @@
       xhr.send() // triggers the request for me
    }
    
-   loadTweets(tweetsEl)
+   loadTweets(tweetsContainerElement)
 
 
    function handleDidLike(tweet_id, currentCount) {

@@ -1187,5 +1187,5 @@ Within home.html i add a script tag to put inside javascript.
 -----------------------------------------
 
 
-
+stoped at 2:31
 
