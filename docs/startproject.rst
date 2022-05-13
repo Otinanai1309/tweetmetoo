@@ -1186,7 +1186,14 @@ Within home.html i add a script tag to put inside javascript.
 2:26:47 29. Serialize Django Model Object
 -----------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/4255cefa2e6a36885832eaefa432a2ae34a98e95
+
 
 2:33:33 30. Append New Tweet & Reorder
 --------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/a61345f4d0961b548f766f880e627c4de95b12b4
+
+
+2:37:09 31. Handling Form Errors
+--------------------------------
