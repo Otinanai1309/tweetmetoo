@@ -1197,3 +1197,9 @@ https://github.com/Otinanai1309/tweetmetoo/commit/a61345f4d0961b548f766f880e627c
 
 2:37:09 31. Handling Form Errors
 --------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/73f7d517921bb70a12bbb17c1514dcc8acc349d0
+
+
+2:42:18 32. Rendering the Error Message via Vanilla JavaScript
+--------------------------------------------------------------
