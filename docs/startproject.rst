@@ -1233,3 +1233,11 @@ Lets first see how i can do it within shell.
     >>> qs = Tweet.objects.filter(user=1)
     >>> qs
     <QuerySet [<Tweet: Tweet object (13)>, <Tweet: Tweet object (12)>, <Tweet: Tweet object (11)>, <Tweet: Tweet object (10)>, <Tweet: Tweet object (9)>, <Tweet: Tweet object (8)>, <Tweet: Tweet object (7)>, <Tweet: Tweet object (6)>, <Tweet: Tweet object (5)>, <Tweet: Tweet object (4)>, <Tweet: Tweet object (3)>, <Tweet: Tweet object (2)>, <Tweet: Tweet object (1)>]>
+
+
+https://github.com/Otinanai1309/tweetmetoo/commit/aa22b3c19a6796f204f1572eee56dc04b0cf84f6
+
+
+3:07:23 35. Associate Authenticated User to Object
+--------------------------------------------------
+
