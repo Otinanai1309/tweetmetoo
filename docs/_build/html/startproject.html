@@ -55,6 +55,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#format-tweet-method">1:25:56 19. Format Tweet Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#like-button-rendering">1:29:30 20. Like Button Rendering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tweet-create-form">1:48:00 22. Tweet Create Form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#serialize-django-model-object">2:26:47 29. Serialize Django Model Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#append-new-tweet-reorder">2:33:33 30. Append New Tweet &amp; Reorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-form-errors">2:37:09 31. Handling Form Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rendering-the-error-message-via-vanilla-javascript">2:42:18 32. Rendering the Error Message via Vanilla JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#users-tweets">2:49:28 33. Users &amp; Tweets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#django-admin">2:57:09 34. Django Admin</a></li>
 </ul>
 </li>
 </ul>
@@ -1120,6 +1126,44 @@ we have to use javascript.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="serialize-django-model-object">
+<h2>2:26:47 29. Serialize Django Model Object<a class="headerlink" href="#serialize-django-model-object" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/4255cefa2e6a36885832eaefa432a2ae34a98e95">https://github.com/Otinanai1309/tweetmetoo/commit/4255cefa2e6a36885832eaefa432a2ae34a98e95</a></p>
+</div>
+<div class="section" id="append-new-tweet-reorder">
+<h2>2:33:33 30. Append New Tweet &amp; Reorder<a class="headerlink" href="#append-new-tweet-reorder" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/a61345f4d0961b548f766f880e627c4de95b12b4">https://github.com/Otinanai1309/tweetmetoo/commit/a61345f4d0961b548f766f880e627c4de95b12b4</a></p>
+</div>
+<div class="section" id="handling-form-errors">
+<h2>2:37:09 31. Handling Form Errors<a class="headerlink" href="#handling-form-errors" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/73f7d517921bb70a12bbb17c1514dcc8acc349d0">https://github.com/Otinanai1309/tweetmetoo/commit/73f7d517921bb70a12bbb17c1514dcc8acc349d0</a></p>
+</div>
+<div class="section" id="rendering-the-error-message-via-vanilla-javascript">
+<h2>2:42:18 32. Rendering the Error Message via Vanilla JavaScript<a class="headerlink" href="#rendering-the-error-message-via-vanilla-javascript" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/c5f3187f59f2bcfc4d0477a519b82fcb70fb4b56">https://github.com/Otinanai1309/tweetmetoo/commit/c5f3187f59f2bcfc4d0477a519b82fcb70fb4b56</a></p>
+</div>
+<div class="section" id="users-tweets">
+<h2>2:49:28 33. Users &amp; Tweets<a class="headerlink" href="#users-tweets" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/a6ba0b3ce0ddb7f806d784b3c0e2bd8fba3d34d1">https://github.com/Otinanai1309/tweetmetoo/commit/a6ba0b3ce0ddb7f806d784b3c0e2bd8fba3d34d1</a></p>
+</div>
+<div class="section" id="django-admin">
+<h2>2:57:09 34. Django Admin<a class="headerlink" href="#django-admin" title="Permalink to this headline"></a></h2>
+<p>if i want to make my admin site more rowbust and add a functionality where i can look for tweets by username.</p>
+<p>Lets first see how i can do it within shell.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>python manage.py shell
+</span><span class="go">&gt;&gt;&gt; from tweets.models import Tweet</span>
+<span class="go">&gt;&gt;&gt; qs = Tweet.objects.filter(id=1)</span>
+<span class="go">&gt;&gt;&gt; qs</span>
+<span class="go">&lt;QuerySet [&lt;Tweet: Tweet object (1)&gt;]&gt;</span>
+<span class="hll"><span class="go">&gt;&gt;&gt; qs = Tweet.objects.filter(user__username=&quot;christos&quot;)</span>
+</span><span class="go">&gt;&gt;&gt; qs</span>
+<span class="go">&lt;QuerySet [&lt;Tweet: Tweet object (13)&gt;, &lt;Tweet: Tweet object (12)&gt;, &lt;Tweet: Tweet object (11)&gt;, &lt;Tweet: Tweet object (10)&gt;, &lt;Tweet: Tweet object (9)&gt;, &lt;Tweet: Tweet object (8)&gt;, &lt;Tweet: Tweet object (7)&gt;, &lt;Tweet: Tweet object (6)&gt;, &lt;Tweet: Tweet object (5)&gt;, &lt;Tweet: Tweet object (4)&gt;, &lt;Tweet: Tweet object (3)&gt;, &lt;Tweet: Tweet object (2)&gt;, &lt;Tweet: Tweet object (1)&gt;]&gt;</span>
+<span class="hll"><span class="go">&gt;&gt;&gt; qs = Tweet.objects.filter(user=1)</span>
+</span><span class="go">&gt;&gt;&gt; qs</span>
+<span class="go">&lt;QuerySet [&lt;Tweet: Tweet object (13)&gt;, &lt;Tweet: Tweet object (12)&gt;, &lt;Tweet: Tweet object (11)&gt;, &lt;Tweet: Tweet object (10)&gt;, &lt;Tweet: Tweet object (9)&gt;, &lt;Tweet: Tweet object (8)&gt;, &lt;Tweet: Tweet object (7)&gt;, &lt;Tweet: Tweet object (6)&gt;, &lt;Tweet: Tweet object (5)&gt;, &lt;Tweet: Tweet object (4)&gt;, &lt;Tweet: Tweet object (3)&gt;, &lt;Tweet: Tweet object (2)&gt;, &lt;Tweet: Tweet object (1)&gt;]&gt;</span>
+</pre></div>
 </div>
 </div>
 </div>

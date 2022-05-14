@@ -1208,3 +1208,28 @@ https://github.com/Otinanai1309/tweetmetoo/commit/c5f3187f59f2bcfc4d0477a519b82f
 
 2:49:28 33. Users & Tweets
 --------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/a6ba0b3ce0ddb7f806d784b3c0e2bd8fba3d34d1
+
+
+2:57:09 34. Django Admin
+------------------------
+
+if i want to make my admin site more rowbust and add a functionality where i can look for tweets by username.
+
+Lets first see how i can do it within shell.
+
+.. code-block:: console
+    :emphasize-lines: 1,6,9
+
+    $ python manage.py shell
+    >>> from tweets.models import Tweet
+    >>> qs = Tweet.objects.filter(id=1)
+    >>> qs
+    <QuerySet [<Tweet: Tweet object (1)>]>
+    >>> qs = Tweet.objects.filter(user__username="christos")   
+    >>> qs
+    <QuerySet [<Tweet: Tweet object (13)>, <Tweet: Tweet object (12)>, <Tweet: Tweet object (11)>, <Tweet: Tweet object (10)>, <Tweet: Tweet object (9)>, <Tweet: Tweet object (8)>, <Tweet: Tweet object (7)>, <Tweet: Tweet object (6)>, <Tweet: Tweet object (5)>, <Tweet: Tweet object (4)>, <Tweet: Tweet object (3)>, <Tweet: Tweet object (2)>, <Tweet: Tweet object (1)>]>
+    >>> qs = Tweet.objects.filter(user=1)
+    >>> qs
+    <QuerySet [<Tweet: Tweet object (13)>, <Tweet: Tweet object (12)>, <Tweet: Tweet object (11)>, <Tweet: Tweet object (10)>, <Tweet: Tweet object (9)>, <Tweet: Tweet object (8)>, <Tweet: Tweet object (7)>, <Tweet: Tweet object (6)>, <Tweet: Tweet object (5)>, <Tweet: Tweet object (4)>, <Tweet: Tweet object (3)>, <Tweet: Tweet object (2)>, <Tweet: Tweet object (1)>]>
