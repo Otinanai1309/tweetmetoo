@@ -1203,3 +1203,8 @@ https://github.com/Otinanai1309/tweetmetoo/commit/73f7d517921bb70a12bbb17c1514dc
 
 2:42:18 32. Rendering the Error Message via Vanilla JavaScript
 --------------------------------------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/c5f3187f59f2bcfc4d0477a519b82fcb70fb4b56
+
+2:49:28 33. Users & Tweets
+--------------------------
