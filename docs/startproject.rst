@@ -1241,3 +1241,13 @@ https://github.com/Otinanai1309/tweetmetoo/commit/aa22b3c19a6796f204f1572eee56dc
 3:07:23 35. Associate Authenticated User to Object
 --------------------------------------------------
 
+
+https://github.com/Otinanai1309/tweetmetoo/commit/205fcbd436d3f6524c1bba5ac56987afae7a61ac
+
+
+3:13:00 36. Permissions & Roadmap
+---------------------------------
+
+
+And now we have just reached the django and JavaScript limitations. The code has began complicated.
+Time to use Rest Framework and React.
