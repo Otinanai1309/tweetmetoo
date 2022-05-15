@@ -1292,3 +1292,9 @@ https://github.com/Otinanai1309/tweetmetoo/commit/265467e548b67eddc6a8ec029c87cf
 3:35:50 40. Permissions and Authentication Classes Decorators for DRF APIs
 --------------------------------------------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/ef4395875bd63233ba150f6d3478a5df2bfa78d2
+
+
+3:43:08 41. Delete Tweet API View
+---------------------------------
+

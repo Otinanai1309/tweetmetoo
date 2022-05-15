@@ -53,6 +53,21 @@ def tweet_detail_view(request, pk,  *args, **kwargs):
     
     return Response(serializer.data, status=200)
 
+@api_view(['DELETE', 'POST'])
+@permission_classes([IsAuthenticated])
+def tweet_delete_view(request, pk,  *args, **kwargs):
+    qs = Tweet.objects.filter(id=pk)
+    print(qs)
+    if not qs.exists():
+        return Response({}, status=404)
+    qs = qs.filter(user=request.user)
+    if not qs.exists():
+        return Response({"message": "You cannot delete this tweet"}, status=401)
+    obj = qs.first()
+    obj.delete()
+    
+    return Response({"message": "Tweet has been deleted successfuly"}, status=200)
+
     
 
 def tweet_create_view_pure_django(request, *args, **kwargs):
