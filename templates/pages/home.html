@@ -84,7 +84,10 @@
             } else {
                alert("An error occured. Please try again.")
             }
-         } else if (xhr.status === 401) {  // Not Authenticaed User
+         } else if (xhr.status === 401) {  // Not Authenticated User
+            alert("You must be logged In, please login first.")
+            window.location.href = "/login"
+         } else if (xhr.status === 403) {  // Not Authenticated User
             alert("You must be logged In, please login first.")
             window.location.href = "/login"
          } else if (xhr.status === 500) {  // 500 server error

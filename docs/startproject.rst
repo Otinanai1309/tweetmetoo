@@ -1286,4 +1286,9 @@ https://github.com/Otinanai1309/tweetmetoo/commit/d0e225d07faa4f79531f2af01f14c0
 3:27:42 39. Django Views to Django Rest Framework Views
 -------------------------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/265467e548b67eddc6a8ec029c87cfd797dd5892
+
+
+3:35:50 40. Permissions and Authentication Classes Decorators for DRF APIs
+--------------------------------------------------------------------------
 

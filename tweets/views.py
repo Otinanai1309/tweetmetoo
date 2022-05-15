@@ -5,7 +5,9 @@ from django.conf import settings
 from django.utils.http import is_safe_url
 from requests import request
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
 from .serializers import TweetSerializer
 
 from tweetmetoo.settings import ALLOWED_HOSTS
@@ -24,6 +26,8 @@ def home_view(request, *args, **kwargs):
 
 
 @api_view(['POST']) # the http method of the client == POST
+@authentication_classes([SessionAuthentication])
+@permission_classes([IsAuthenticated])  # check on REST API course for more info's
 def tweet_create_view(request, *args, **kwargs):
     serializer = TweetSerializer(data = request.POST or None)
     if serializer.is_valid(raise_exception=True):
