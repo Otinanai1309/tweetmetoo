@@ -69,6 +69,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#permissions-and-authentication-classes-decorators-for-drf-apis">3:35:50 40. Permissions and Authentication Classes Decorators for DRF APIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#delete-tweet-api-view">3:43:08 41. Delete Tweet API View</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-a-like-field">3:49:43 42. Adding a Like Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-setting-manytomayfields">3:56:00 43. Understanding Setting ManyToMayFields</a></li>
 </ul>
 </li>
 </ul>
@@ -1220,6 +1221,61 @@ Time to use Rest Framework and React.</p>
 </div>
 <div class="section" id="adding-a-like-field">
 <h2>3:49:43 42. Adding a Like Field<a class="headerlink" href="#adding-a-like-field" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/6a65ac56e53818ce1a329dbd760b5d61fe4b627e">https://github.com/Otinanai1309/tweetmetoo/commit/6a65ac56e53818ce1a329dbd760b5d61fe4b627e</a></p>
+</div>
+<div class="section" id="understanding-setting-manytomayfields">
+<h2>3:56:00 43. Understanding Setting ManyToMayFields<a class="headerlink" href="#understanding-setting-manytomayfields" title="Permalink to this headline"></a></h2>
+<p>First we will use pythons shell to work with Likes and Tweets directly to the database.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>python manage.py shell
+</span><span class="go">&gt;&gt;&gt; from tweets.models import Tweet</span>
+<span class="go">&gt;&gt;&gt; from tweets.models import TweetLike</span>
+<span class="go">&gt;&gt;&gt; TweetLike.objects.all()</span>
+<span class="go">&lt;QuerySet [&lt;TweetLike: TweetLike object (1)&gt;, &lt;TweetLike: TweetLike object (2)&gt;]&gt;</span>
+<span class="hll"><span class="go">&gt;&gt;&gt; TweetLike.objects.all().delete()</span>
+</span><span class="gp gp-VirtualEnv">(2, {&#39;tweets.TweetLike&#39;: 2})</span>
+<span class="go">&gt;&gt;&gt; TweetLike.objects.all()</span>
+<span class="go">&lt;QuerySet []&gt;</span>
+
+<span class="go">&gt;&gt;&gt; Tweet.objects.all()</span>
+<span class="go">&lt;QuerySet [&lt;Tweet: 52    a new tweet&gt;, &lt;Tweet: 51    kello there!!!&gt;, &lt;Tweet: 50    Here we go!!!!&gt;, &lt;Tweet: 47    Yet another try with that obj&gt;, &lt;Tweet: 46    another try with staus 200&gt;, &lt;Tweet: 45    another try with staus 200&gt;, &lt;Tweet: 44    HI there!! Whats up?&gt;,</span>
+<span class="go">&lt;Tweet: 43    asdasd&gt;, &lt;Tweet: 42    a new tweet&gt;, &lt;Tweet: 13    Another tweet with redirect and is_safe_url implemented!!&gt;, &lt;Tweet: 12    Yet another cool tweet!&gt;, &lt;Tweet: 11    Another cool tweet!!&gt;, &lt;Tweet: 10    Yet another testing tweet!&gt;, &lt;Tweet: 9    again!!!&gt;, &lt;Tweet: 8    Another tweet&gt;, &lt;Tweet: 7    Hello, yet again!!!&gt;, &lt;Tweet: 6    Hello, again!&gt;, &lt;Tweet: 5    Hi there!&gt;, &lt;Tweet: 4    my forth attemp will be succesful!&gt;, &lt;Tweet: 3</span>
+<span class="go">My third demand for help&gt;, &#39;...(remaining elements truncated)...&#39;]&gt;</span>
+<span class="go">&gt;&gt;&gt; obj = Tweet.objects.first()</span>
+<span class="go">&gt;&gt;&gt; obj.likes.all()</span>
+<span class="go">&lt;QuerySet []&gt;</span>
+<span class="go">&gt;&gt;&gt; from django.contrib.auth import get_user_model</span>
+<span class="go">&gt;&gt;&gt; User = get_user_model()</span>
+<span class="go">&gt;&gt;&gt; User.objects.all()</span>
+<span class="go">&lt;QuerySet [&lt;User: christos&gt;]&gt;</span>
+<span class="go">&gt;&gt;&gt; me = User.objects.first()</span>
+<span class="go">&gt;&gt;&gt; me</span>
+<span class="go">&lt;User: christos&gt;</span>
+<span class="go">&gt;&gt;&gt; obj.likes.add(me)</span>
+<span class="go">&gt;&gt;&gt; obj.likes.all()</span>
+<span class="go">&lt;QuerySet [&lt;User: christos&gt;]&gt;</span>
+<span class="go">&gt;&gt;&gt; obj.likes.remove(me)</span>
+<span class="go">&gt;&gt;&gt; obj.likes.all()</span>
+<span class="go">&lt;QuerySet []&gt;</span>
+<span class="go">&gt;&gt;&gt; qs = User.objects.all()</span>
+<span class="go">&gt;&gt;&gt; obj.likes.set(qs)</span>
+<span class="go">&gt;&gt;&gt; obj.likes.all()</span>
+<span class="go">&lt;QuerySet [&lt;User: christos&gt;]&gt;</span>
+<span class="go">&gt;&gt;&gt; TweetLike.objects.all()</span>
+<span class="go">&lt;QuerySet [&lt;TweetLike: TweetLike object (4)&gt;]&gt;</span>
+
+<span class="go">&gt;&gt;&gt; TweetLike.objects.first().timestamp</span>
+<span class="go">datetime.datetime(2022, 5, 15, 16, 37, 46, 253748, tzinfo=&lt;UTC&gt;)</span>
+
+<span class="go">&gt;&gt;&gt; obj.likes.remove(me)</span>
+<span class="go">&gt;&gt;&gt; obj.likes.all()</span>
+<span class="go">&lt;QuerySet []&gt;</span>
+
+<span class="go">&gt;&gt;&gt; TweetLike.objects.create(user=me, tweet=obj)</span>
+<span class="go">&lt;TweetLike: TweetLike object (5)&gt;</span>
+<span class="go">&gt;&gt;&gt; obj.likes.all()</span>
+<span class="go">&lt;QuerySet [&lt;User: christos&gt;]&gt;</span>
+</pre></div>
+</div>
 </div>
 </div>
 

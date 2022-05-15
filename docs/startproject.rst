@@ -1304,5 +1304,67 @@ https://github.com/Otinanai1309/tweetmetoo/commit/ab4a828dbae0c35cc8ac11bade6894
 3:49:43 42. Adding a Like Field
 -------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/6a65ac56e53818ce1a329dbd760b5d61fe4b627e
+
+
+3:56:00 43. Understanding Setting ManyToMayFields
+-------------------------------------------------
+
+First we will use pythons shell to work with Likes and Tweets directly to the database.
+
+.. code-block:: console
+    :emphasize-lines: 1, 6
+
+    $ python manage.py shell
+    >>> from tweets.models import Tweet
+    >>> from tweets.models import TweetLike
+    >>> TweetLike.objects.all()
+    <QuerySet [<TweetLike: TweetLike object (1)>, <TweetLike: TweetLike object (2)>]>
+    >>> TweetLike.objects.all().delete()
+    (2, {'tweets.TweetLike': 2})
+    >>> TweetLike.objects.all()
+    <QuerySet []>
+
+    >>> Tweet.objects.all()
+    <QuerySet [<Tweet: 52    a new tweet>, <Tweet: 51    kello there!!!>, <Tweet: 50    Here we go!!!!>, <Tweet: 47    Yet another try with that obj>, <Tweet: 46    another try with staus 200>, <Tweet: 45    another try with staus 200>, <Tweet: 44    HI there!! Whats up?>, 
+    <Tweet: 43    asdasd>, <Tweet: 42    a new tweet>, <Tweet: 13    Another tweet with redirect and is_safe_url implemented!!>, <Tweet: 12    Yet another cool tweet!>, <Tweet: 11    Another cool tweet!!>, <Tweet: 10    Yet another testing tweet!>, <Tweet: 9    again!!!>, <Tweet: 8    Another tweet>, <Tweet: 7    Hello, yet again!!!>, <Tweet: 6    Hello, again!>, <Tweet: 5    Hi there!>, <Tweet: 4    my forth attemp will be succesful!>, <Tweet: 3    
+    My third demand for help>, '...(remaining elements truncated)...']>
+    >>> obj = Tweet.objects.first()
+    >>> obj.likes.all()
+    <QuerySet []>
+    >>> from django.contrib.auth import get_user_model
+    >>> User = get_user_model()
+    >>> User.objects.all()
+    <QuerySet [<User: christos>]>
+    >>> me = User.objects.first()
+    >>> me
+    <User: christos>
+    >>> obj.likes.add(me)
+    >>> obj.likes.all()
+    <QuerySet [<User: christos>]>
+    >>> obj.likes.remove(me)
+    >>> obj.likes.all()
+    <QuerySet []>
+    >>> qs = User.objects.all()
+    >>> obj.likes.set(qs)
+    >>> obj.likes.all()
+    <QuerySet [<User: christos>]>
+    >>> TweetLike.objects.all()
+    <QuerySet [<TweetLike: TweetLike object (4)>]>
+    
+    >>> TweetLike.objects.first().timestamp 
+    datetime.datetime(2022, 5, 15, 16, 37, 46, 253748, tzinfo=<UTC>)
+
+    >>> obj.likes.remove(me)
+    >>> obj.likes.all()
+    <QuerySet []>
+    
+    >>> TweetLike.objects.create(user=me, tweet=obj)
+    <TweetLike: TweetLike object (5)>
+    >>> obj.likes.all()
+    <QuerySet [<User: christos>]>
+
+
+
 
 
