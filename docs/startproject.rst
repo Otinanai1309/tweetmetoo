@@ -1272,4 +1272,11 @@ Time to use Rest Framework and React.
     Installing collected packages: djangorestframework
     Successfully installed djangorestframework-3.13.1
 
-    
+
+https://github.com/Otinanai1309/tweetmetoo/commit/a88d2b6b47cfc5138f6e2dff58632b5922abb657
+
+
+3:18:20 38. Django Forms to Django Rest Framework Serializer
+------------------------------------------------------------
+
+

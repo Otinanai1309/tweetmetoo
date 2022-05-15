@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.utils.http import is_safe_url
 from requests import request
+# from rest_framework import serializers
+from .serializers import TweetSerializer
 
 from tweetmetoo.settings import ALLOWED_HOSTS
 
@@ -21,6 +23,13 @@ def home_view(request, *args, **kwargs):
 
 
 def tweet_create_view(request, *args, **kwargs):
+    serializer = TweetSerializer(data = request.POST or None)
+    if serializer.is_valid():
+        serializer.save(user = request.user)
+        return JsonResponse(serializer.data, status = 201)
+    return JsonResponse({}, status=400)
+
+def tweet_create_view_pure_django(request, *args, **kwargs):
     # print("ajax:", request.headers.get('x-requested-with') == 'XMLHttpRequest')
     user = request.user 
     if not request.user.is_authenticated:

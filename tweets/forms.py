@@ -2,10 +2,11 @@ from dataclasses import fields
 from pyexpat import model
 from unittest.util import _MAX_LENGTH
 from django import forms
+from django.conf import settings
 
 from .models import Tweet
 
-MAX_TWEET_LENGTH = 240
+MAX_TWEET_LENGTH = settings.MAX_TWEET_LENGTH
 
 class TweetForm(forms.ModelForm):
     
