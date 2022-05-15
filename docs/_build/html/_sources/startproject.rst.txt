@@ -1245,4 +1245,31 @@ https://github.com/Otinanai1309/tweetmetoo/commit/aa22b3c19a6796f204f1572eee56dc
 https://github.com/Otinanai1309/tweetmetoo/commit/205fcbd436d3f6524c1bba5ac56987afae7a61ac
 
 
+3:13:00 36. Permissions & Roadmap
+---------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/3db3a8751bd23be1421cd3108a2b9c1e382fce81
+
+And now we have just reached the django and JavaScript limitations. The code has began complicated.
+Time to use Rest Framework and React.
+
+3:16:16 37. Install Django Rest Framework
+-----------------------------------------
+
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ pip install djangorestframework
+    Collecting djangorestframework
+    Downloading djangorestframework-3.13.1-py3-none-any.whl (958 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 958.3/958.3 KB 2.3 MB/s eta 0:00:00
+    Requirement already satisfied: pytz in c:\mydjangorestfullreactapps\twitterlikeapp2\venv\lib\site-packages (from djangorestframework) (2022.1)
+    Requirement already satisfied: django>=2.2 in c:\mydjangorestfullreactapps\twitterlikeapp2\venv\lib\site-packages (from djangorestframework) (3.2.13)
+    Requirement already satisfied: asgiref<4,>=3.3.2 in c:\mydjangorestfullreactapps\twitterlikeapp2\venv\lib\site-packages (from django>=2.2->djangorestframework) (3.5.0)
+    Requirement already satisfied: sqlparse>=0.2.2 in c:\mydjangorestfullreactapps\twitterlikeapp2\venv\lib\site-packages (from 
+    django>=2.2->djangorestframework) (0.4.2)
+    Installing collected packages: djangorestframework
+    Successfully installed djangorestframework-3.13.1
+
+    
