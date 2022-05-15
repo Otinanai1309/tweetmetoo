@@ -11,7 +11,7 @@ class Tweet(models.Model):
     image = models.FileField(upload_to='images/', blank=True, null=True)
     
     def __str__(self):
-        return self.content
+        return f"{self.id}    {self.content}"
     class Meta:
         ordering = ['-id']  # descending order of new tweets
         

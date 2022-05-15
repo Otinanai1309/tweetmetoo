@@ -1280,3 +1280,10 @@ https://github.com/Otinanai1309/tweetmetoo/commit/a88d2b6b47cfc5138f6e2dff58632b
 ------------------------------------------------------------
 
 
+https://github.com/Otinanai1309/tweetmetoo/commit/d0e225d07faa4f79531f2af01f14c023b9b78655
+
+
+3:27:42 39. Django Views to Django Rest Framework Views
+-------------------------------------------------------
+
+
