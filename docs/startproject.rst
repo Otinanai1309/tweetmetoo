@@ -1358,13 +1358,18 @@ First we will use pythons shell to work with Likes and Tweets directly to the da
     >>> obj.likes.remove(me)
     >>> obj.likes.all()
     <QuerySet []>
-    
+
     >>> TweetLike.objects.create(user=me, tweet=obj)
     <TweetLike: TweetLike object (5)>
     >>> obj.likes.all()
     <QuerySet [<User: christos>]>
 
 
+
+https://github.com/Otinanai1309/tweetmetoo/commit/1ea087f57f6165c476a969187852752ca9a9a563
+
+4:03:32 44. Tweet Action View
+-----------------------------
 
 
 
