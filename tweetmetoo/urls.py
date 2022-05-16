@@ -24,5 +24,6 @@ urlpatterns = [
     path('tweets/', views.tweet_list_view, name="tweet-list-view"),
     path('tweets_detail/<int:pk>', views.tweet_detail_view, name="tweet-detail-view"),
     path('api/tweets/<int:pk>/delete', views.tweet_delete_view, name='tweet-delete-view'),
+    path('api/tweets/action', views.tweet_action_view, name='tweet-action-view'),
     path('dynamic_routing/<str:name>', views.dynamic_routing, name="dynamic-routing"),
 ]

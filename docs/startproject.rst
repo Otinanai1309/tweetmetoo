@@ -1371,5 +1371,10 @@ https://github.com/Otinanai1309/tweetmetoo/commit/1ea087f57f6165c476a96918785275
 4:03:32 44. Tweet Action View
 -----------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/e3ed3e9f7d2107cbf8d08e1c5294005aa1a15b67
+
+
+04:11:02 45. JavaScript Tweet Action Handler
+--------------------------------------------
 
 
