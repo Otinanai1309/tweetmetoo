@@ -1377,4 +1377,11 @@ https://github.com/Otinanai1309/tweetmetoo/commit/e3ed3e9f7d2107cbf8d08e1c529400
 04:11:02 45. JavaScript Tweet Action Handler
 --------------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/3a120955b502e78ef2b663e68896915d60c447ab
+
+
+04:15:56 46. CSRF & Client Side Action Buttons
+----------------------------------------------
+
+https://docs.djangoproject.com/en/4.0/ref/csrf/ to the Ajax section
 
