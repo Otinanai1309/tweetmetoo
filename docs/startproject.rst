@@ -1383,5 +1383,16 @@ https://github.com/Otinanai1309/tweetmetoo/commit/3a120955b502e78ef2b663e6889691
 04:15:56 46. CSRF & Client Side Action Buttons
 ----------------------------------------------
 
+Django documentation
 https://docs.djangoproject.com/en/4.0/ref/csrf/ to the Ajax section
 
+https://github.com/Otinanai1309/tweetmetoo/commit/6c4c350a9b8179f16f0be6601805b320db97a9fc
+
+
+04:24:18 47. Retweeting Logic
+-----------------------------
+
+
+
+04:32:30 48. Two Types of Serializers
+-------------------------------------

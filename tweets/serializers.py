@@ -1,4 +1,6 @@
 from dataclasses import fields
+from typing_extensions import Required
+from pkg_resources import require
 from rest_framework import serializers
 from django.conf import settings
 
@@ -9,7 +11,7 @@ TWEET_ACTION_OPTIONS = settings.TWEET_ACTION_OPTIONS
 class TweetActionSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     action = serializers.CharField()
-    
+    content = serializers.CharField(allow_blank=True, required=False)
     def validate_action(self, value):
         value = value.lower().strip()
         if not value in TWEET_ACTION_OPTIONS:
@@ -20,7 +22,7 @@ class TweetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tweet
         fields = ['id', 'content', 'likes']
-    
+
     def get_likes(self, obj):
         return obj.likes.count()
         
