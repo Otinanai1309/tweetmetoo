@@ -1392,7 +1392,13 @@ https://github.com/Otinanai1309/tweetmetoo/commit/6c4c350a9b8179f16f0be6601805b3
 04:24:18 47. Retweeting Logic
 -----------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/9528fa2f48158be0efeeb06c3cf69238933feafb
 
 
 04:32:30 48. Two Types of Serializers
 -------------------------------------
+
+In order to add the Retweet functionality we need two typew of Serializers.
+
+#. A read only Serializer and 
+#. A create only Serializer.
