@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from tweets import views
 
 urlpatterns = [
@@ -23,7 +23,7 @@ urlpatterns = [
     path('create_tweet/', views.tweet_create_view, name="tweet-create-view"),
     path('tweets/', views.tweet_list_view, name="tweet-list-view"),
     path('tweets_detail/<int:pk>', views.tweet_detail_view, name="tweet-detail-view"),
-    path('api/tweets/<int:pk>/delete', views.tweet_delete_view, name='tweet-delete-view'),
-    path('api/tweets/action', views.tweet_action_view, name='tweet-action-view'),
-    path('dynamic_routing/<str:name>', views.dynamic_routing, name="dynamic-routing"),
+    # path('api/tweets/<int:pk>/delete', views.tweet_delete_view, name='tweet-delete-view'),
+    # path('api/tweets/action', views.tweet_action_view, name='tweet-action-view'),
+    path('api/tweets/', include('tweets.urls')),
 ]

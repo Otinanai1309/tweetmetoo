@@ -1402,3 +1402,9 @@ In order to add the Retweet functionality we need two typew of Serializers.
 
 #. A read only Serializer and 
 #. A create only Serializer.
+
+
+https://github.com/Otinanai1309/tweetmetoo/commit/b67d95c597ac92888dfdc76cd57e8a0de912aebb
+
+04:41:29 49. Internal App Urls
+------------------------------
