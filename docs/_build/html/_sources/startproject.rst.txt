@@ -1408,3 +1408,51 @@ https://github.com/Otinanai1309/tweetmetoo/commit/b67d95c597ac92888dfdc76cd57e8a
 
 04:41:29 49. Internal App Urls
 ------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/6fecaa7f1528afb8f0686e80625f19a5dea17d70
+
+
+04:45:15 50. Setting up Tests in Django
+---------------------------------------
+
+We write a test in tests.py 
+
+.. code-block:: python
+    :emphasize-lines: 1
+
+    # tweets/tests.py
+    from django.contrib.auth import get_user_model
+    from django.test import TestCase
+
+    from .models import Tweet
+
+    # Create your tests here.
+    User = get_user_model()
+    class TweetTestCase(TestCase):
+        # builtIn method setUp
+        def setUp(self):
+            User.objects.create_user(username='abc', password='somepassword')
+            
+            
+        def test_user_created(self):
+            user = User.objects.get(username='abc')
+            self.assertEqual(user.username, 'abc')
+        
+
+after that we run:
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ python manage.py test
+    Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).Creating test database for alias 'default'...
+    System check identified no issues (0 silenced).
+    .
+    ----------------------------------------------------------------------
+    Ran 1 test in 0.129s
+
+    OK
+    Destroying test database for alias 'default'...
+
+    

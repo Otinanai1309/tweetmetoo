@@ -76,6 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#retweeting-logic">04:24:18 47. Retweeting Logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#two-types-of-serializers">04:32:30 48. Two Types of Serializers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#internal-app-urls">04:41:29 49. Internal App Urls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-tests-in-django">04:45:15 50. Setting up Tests in Django</a></li>
 </ul>
 </li>
 </ul>
@@ -1313,6 +1314,43 @@ Time to use Rest Framework and React.</p>
 </div>
 <div class="section" id="internal-app-urls">
 <h2>04:41:29 49. Internal App Urls<a class="headerlink" href="#internal-app-urls" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/6fecaa7f1528afb8f0686e80625f19a5dea17d70">https://github.com/Otinanai1309/tweetmetoo/commit/6fecaa7f1528afb8f0686e80625f19a5dea17d70</a></p>
+</div>
+<div class="section" id="setting-up-tests-in-django">
+<h2>04:45:15 50. Setting up Tests in Django<a class="headerlink" href="#setting-up-tests-in-django" title="Permalink to this headline"></a></h2>
+<p>We write a test in tests.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="c1"># tweets/tests.py</span>
+</span><span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">get_user_model</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Tweet</span>
+
+<span class="c1"># Create your tests here.</span>
+<span class="n">User</span> <span class="o">=</span> <span class="n">get_user_model</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">TweetTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="c1"># builtIn method setUp</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;somepassword&#39;</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">test_user_created</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>after that we run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>python manage.py <span class="nb">test</span>
+</span><span class="go">Creating test database for alias &#39;default&#39;...</span>
+<span class="go">System check identified no issues (0 silenced).Creating test database for alias &#39;default&#39;...</span>
+<span class="go">System check identified no issues (0 silenced).</span>
+<span class="go">.</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Ran 1 test in 0.129s</span>
+
+<span class="go">OK</span>
+<span class="go">Destroying test database for alias &#39;default&#39;...</span>
+</pre></div>
+</div>
 </div>
 </div>
 

@@ -2,6 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+"""
+CLIENT
+Base ENDPOINT /api/tweets/
+"""
+
 urlpatterns = [
     path('', views.tweet_list_view, name="tweet-list-view"),
     path('action/', views.tweet_action_view, name='tweet-action-view'),
