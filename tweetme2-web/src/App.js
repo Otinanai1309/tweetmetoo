@@ -5,7 +5,7 @@ import './App.css';
 function loadTweets(callback) {
   const xhr = new XMLHttpRequest() 
   const method = "GET" //"POST"
-  const url = "http://127.0.0.1:8000/api/tweets/"
+  const url = "http://localhost:8000/api/tweets/"
   const responseType = "json"
 
   // Now i can perform the request 
