@@ -1617,7 +1617,8 @@ https://github.com/Otinanai1309/tweetmetoo/commit/ea8a1bfea80af89a29067300fa0bec
 
     export default App;
 
+https://github.com/Otinanai1309/tweetmetoo/commit/ec69b6e0f583dabd46c9305b3545e09193ebcab4
 
-05:26:27 54. Ajax lookup via XHR in React.js
---------------------------------------------
+
+
 

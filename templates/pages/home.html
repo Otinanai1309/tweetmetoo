@@ -106,7 +106,7 @@
 
       const tweetsContainerElement = document.getElementById('tweets') 
 
-      const loadTweets = function(tweetsElement) {
+      function loadTweets(tweetsElement) {
          const xhr = new XMLHttpRequest() 
          const method = "GET" //"POST"
          const url = "/tweets"
