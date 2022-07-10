@@ -78,6 +78,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#internal-app-urls">04:41:29 49. Internal App Urls</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setting-up-tests-in-django">04:45:15 50. Setting up Tests in Django</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#verify-or-install-node-js">05:12:14 51. Verify or Install Node.js</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-react-app">05:15:57 52. Create React App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-functional-components">05:20:29 53. Understanding Functional Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ajax-lookup-via-xhr-in-react-js">05:26:27 54. Ajax lookup via XHR in React.js</a></li>
 </ul>
 </li>
 </ul>
@@ -1356,6 +1359,147 @@ Time to use Rest Framework and React.</p>
 </div>
 <div class="section" id="verify-or-install-node-js">
 <h2>05:12:14 51. Verify or Install Node.js<a class="headerlink" href="#verify-or-install-node-js" title="Permalink to this headline"></a></h2>
+<p>Install Nodejs LTS.</p>
+<p>Type:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>npm --version
+</span><span class="go">8.5.5</span>
+<span class="gp">$ </span>npx --version
+<span class="go">8.5.5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-react-app">
+<h2>05:15:57 52. Create React App<a class="headerlink" href="#create-react-app" title="Permalink to this headline"></a></h2>
+<p>Go to <a class="reference external" href="https://reactjs.org/">https://reactjs.org/</a> and press Get Started –&gt; <a class="reference external" href="https://reactjs.org/docs/getting-started.html">https://reactjs.org/docs/getting-started.html</a>
+On the right side Create a new React App –&gt; <a class="reference external" href="https://reactjs.org/docs/create-a-new-react-app.html">https://reactjs.org/docs/create-a-new-react-app.html</a></p>
+<p>Oneway to create a React app is:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>npx create-react-app tweetme2-web
+</span><span class="go">Need to install the following packages:</span>
+<span class="go">create-react-app</span>
+<span class="go">Ok to proceed? (y) y</span>
+<span class="go">npm WARN deprecated tar@2.2.2: This version of tar is no longer supported, and will not receive</span>
+<span class="go">security updates. Please upgrade asap.</span>
+
+<span class="go">Creating a new React app in C:\MyDjangoRestfullReactApps\TwitterLikeApp2\tweetme2-web.</span>
+
+<span class="go">Installing packages. This might take a couple of minutes.</span>
+<span class="go">Installing react, react-dom, and react-scripts with cra-template...</span>
+
+
+<span class="go">added 1382 packages in 1m</span>
+
+<span class="go">185 packages are looking for funding</span>
+<span class="go">run `npm fund` for details</span>
+
+<span class="go">Installing template dependencies using npm...</span>
+<span class="go">npm WARN deprecated source-map-resolve@0.6.0: See https://github.com/lydell/source-map-resolve#deprecated</span>
+
+<span class="go">added 39 packages in 7s</span>
+
+<span class="go">185 packages are looking for funding</span>
+<span class="go">run `npm fund` for details</span>
+<span class="go">Removing template package using npm...</span>
+
+
+<span class="go">removed 1 package, and audited 1421 packages in 3s</span>
+
+<span class="go">185 packages are looking for funding</span>
+<span class="go">run `npm fund` for details</span>
+
+<span class="go">6 high severity vulnerabilities</span>
+
+<span class="go">To address all issues (including breaking changes), run:</span>
+<span class="go">npm audit fix --force</span>
+
+<span class="go">Run `npm audit` for details.</span>
+
+<span class="go">Success! Created tweetme2-web at C:\MyDjangoRestfullReactApps\TwitterLikeApp2\tweetme2-web</span>
+<span class="go">Inside that directory, you can run several commands:</span>
+
+<span class="go">npm start</span>
+<span class="go">    Starts the development server.</span>
+
+<span class="go">npm run build</span>
+<span class="go">    Bundles the app into static files for production.</span>
+
+<span class="go">npm test</span>
+<span class="go">    Starts the test runner.</span>
+
+<span class="go">npm run eject</span>
+<span class="go">    Removes this tool and copies build dependencies, configuration files</span>
+<span class="go">    and scripts into the app directory. If you do this, you can’t go back!</span>
+
+<span class="go">We suggest that you begin by typing:</span>
+
+<span class="go">cd tweetme2-web</span>
+<span class="go">npm start</span>
+
+<span class="go">Happy hacking!</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/ea8a1bfea80af89a29067300fa0bec66c24fdc73">https://github.com/Otinanai1309/tweetmetoo/commit/ea8a1bfea80af89a29067300fa0bec66c24fdc73</a></p>
+</div>
+<div class="section" id="understanding-functional-components">
+<h2>05:20:29 53. Understanding Functional Components<a class="headerlink" href="#understanding-functional-components" title="Permalink to this headline"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span><span class="nb">cd</span> tweetme2-web
+</span><span class="gp">$ </span>npm start
+<span class="go">Compiled successfully!</span>
+
+<span class="go">You can now view tweetme2-web in the browser.</span>
+
+<span class="go">Local:            http://localhost:3000</span>
+<span class="go">On Your Network:  http://10.5.0.2:3000</span>
+
+<span class="go">Note that the development build is not optimized.</span>
+<span class="go">To create a production build, use npm run build.</span>
+
+<span class="go">webpack compiled successfully</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="hll">tweetme2-web/src/App.js
+</span>import React, {useEffect, useState} from &#39;react&#39;;
+import logo from &#39;./logo.svg&#39;;
+import &#39;./App.css&#39;;
+
+function App() {
+const [tweets, setTweets] = useState([])
+
+useEffect(() =&gt; {
+    // do my lookup here
+    const tweetItems = [{&quot;content&quot;:123}, {&quot;content&quot;: &quot;Hello World&quot;}]
+    setTweets(tweetItems)
+}, [])
+return (
+    &lt;div className=&quot;App&quot;&gt;
+    &lt;header className=&quot;App-header&quot;&gt;
+        &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
+        &lt;p&gt;
+        Edit &lt;code&gt;src/App.js&lt;/code&gt; and save to reload.
+        &lt;/p&gt;
+        &lt;p&gt;
+        {tweets.map((tweet, index)=&gt;{
+            return &lt;li&gt;{tweet.content}&lt;/li&gt;
+        })}
+        &lt;/p&gt;
+        &lt;a
+        className=&quot;App-link&quot;
+        href=&quot;https://reactjs.org&quot;
+        target=&quot;_blank&quot;
+        rel=&quot;noopener noreferrer&quot;
+        &gt;
+        Learn React
+        &lt;/a&gt;
+    &lt;/header&gt;
+    &lt;/div&gt;
+);
+}
+
+export default App;
+</pre></div>
+</div>
+</div>
+<div class="section" id="ajax-lookup-via-xhr-in-react-js">
+<h2>05:26:27 54. Ajax lookup via XHR in React.js<a class="headerlink" href="#ajax-lookup-via-xhr-in-react-js" title="Permalink to this headline"></a></h2>
 </div>
 </div>
 
