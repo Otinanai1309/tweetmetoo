@@ -24,3 +24,10 @@ In order to make React render correctly our posts i have to do some changes.
 
 I follow instuctions from https://pypi.org/project/django-cors-headers/
 and i make a few changes mainly to the settings.py
+
+https://github.com/Otinanai1309/tweetmetoo/commit/b87698facaadaed63520e33b62af7d357ad347ae
+
+
+05:35:35 56. Functional Components in React
+-------------------------------------------
+
