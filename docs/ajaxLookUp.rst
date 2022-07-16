@@ -62,3 +62,12 @@ https://github.com/Otinanai1309/tweetmetoo/commit/304c9008b3b06f8054123b81feca34
 
 06:03:02 61. Handling a Form in React
 -------------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/43a2c140336967dc2480b335796dc94c161d6e7f
+
+
+6:08:55 62. Pass from Parent Component to Child with useEffect
+--------------------------------------------------------------
+
+There is an error the React part doesn't work but i will continue anyway.
+
