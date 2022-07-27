@@ -50,6 +50,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#improved-action-btn">05:53:00 59. Improved Action Btn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#understanding-setstate-hook">05:57:31 60. Understanding setState Hook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#handling-a-form-in-react">06:03:02 61. Handling a Form in React</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pass-from-parent-component-to-child-with-useeffect">6:08:55 62. Pass from Parent Component to Child with useEffect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adjust-the-react-render-process">06:19:10 63. Adjust the React Render Process</a></li>
 </ul>
 </li>
 </ul>
@@ -122,6 +124,35 @@ and i make a few changes mainly to the settings.py</p>
 <div class="section" id="handling-a-form-in-react">
 <h2>06:03:02 61. Handling a Form in React<a class="headerlink" href="#handling-a-form-in-react" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/43a2c140336967dc2480b335796dc94c161d6e7f">https://github.com/Otinanai1309/tweetmetoo/commit/43a2c140336967dc2480b335796dc94c161d6e7f</a></p>
+</div>
+<div class="section" id="pass-from-parent-component-to-child-with-useeffect">
+<h2>6:08:55 62. Pass from Parent Component to Child with useEffect<a class="headerlink" href="#pass-from-parent-component-to-child-with-useeffect" title="Permalink to this headline"></a></h2>
+<p>There is an error the React part doesn’t work but i will continue anyway.</p>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/52aa01dd17a5ed5cc759fb0d9fd64e5d1daded37">https://github.com/Otinanai1309/tweetmetoo/commit/52aa01dd17a5ed5cc759fb0d9fd64e5d1daded37</a></p>
+</div>
+<div class="section" id="adjust-the-react-render-process">
+<h2>06:19:10 63. Adjust the React Render Process<a class="headerlink" href="#adjust-the-react-render-process" title="Permalink to this headline"></a></h2>
+<p>create a React production build by running</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>npm run build
+</span><span class="go">&gt; tweetme2-web@0.1.0 build</span>
+<span class="go">&gt; react-scripts build</span>
+
+<span class="go">Creating an optimized production build...</span>
+<span class="go">Compiled successfully.</span>
+
+<span class="go">File sizes after gzip:</span>
+
+<span class="go">46.76 kB  build\static\js\main.587b742f.js</span>
+<span class="go">541 B     build\static\css\main.073c9b0a.css</span>
+<span class="go">You can control this with the homepage field in your package.json.</span>
+
+<span class="go">The build folder is ready to be deployed.</span>
+<span class="go">You may serve it with a static server:</span>
+
+<span class="go">npm install -g serve</span>
+<span class="go">serve -s build</span>
+</pre></div>
+</div>
 </div>
 </div>
 

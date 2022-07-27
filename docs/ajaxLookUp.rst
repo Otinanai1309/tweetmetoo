@@ -71,3 +71,32 @@ https://github.com/Otinanai1309/tweetmetoo/commit/43a2c140336967dc2480b335796dc9
 
 There is an error the React part doesn't work but i will continue anyway.
 
+https://github.com/Otinanai1309/tweetmetoo/commit/52aa01dd17a5ed5cc759fb0d9fd64e5d1daded37
+
+
+06:19:10 63. Adjust the React Render Process
+--------------------------------------------
+
+create a React production build by running 
+
+.. code-block:: console
+    :emphasize-lines: 1
+
+    $ npm run build
+    > tweetme2-web@0.1.0 build
+    > react-scripts build
+
+    Creating an optimized production build...
+    Compiled successfully.
+
+    File sizes after gzip:
+
+    46.76 kB  build\static\js\main.587b742f.js
+    541 B     build\static\css\main.073c9b0a.css
+    You can control this with the homepage field in your package.json.
+
+    The build folder is ready to be deployed.
+    You may serve it with a static server:
+
+    npm install -g serve
+    serve -s build
