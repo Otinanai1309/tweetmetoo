@@ -104,6 +104,7 @@ create a React production build by running
 
 https://github.com/Otinanai1309/tweetmetoo/commit/1f531ce366ee6103dc44502b708d3a8a74aed04b
 
+
 06:23:07 64. React Rendered by Django
 -------------------------------------
 
@@ -120,4 +121,11 @@ Then in my projects folder i run
 
     $ .\manage.py collectstatic
     167 static files copied to 'C:\MyDjangoRestfullReactApps\TwitterLikeApp2\static-root'.
+
+https://github.com/Otinanai1309/tweetmetoo/commit/5665549b7c9034428d0e0ccffc93e41e358af893
+
+
+06:30:22 65. Render React App via Any Django Template
+-----------------------------------------------------
+
 

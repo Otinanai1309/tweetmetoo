@@ -52,6 +52,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#handling-a-form-in-react">06:03:02 61. Handling a Form in React</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pass-from-parent-component-to-child-with-useeffect">6:08:55 62. Pass from Parent Component to Child with useEffect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adjust-the-react-render-process">06:19:10 63. Adjust the React Render Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#react-rendered-by-django">06:23:07 64. React Rendered by Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#render-react-app-via-any-django-template">06:30:22 65. Render React App via Any Django Template</a></li>
 </ul>
 </li>
 </ul>
@@ -153,6 +155,23 @@ and i make a few changes mainly to the settings.py</p>
 <span class="go">serve -s build</span>
 </pre></div>
 </div>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/1f531ce366ee6103dc44502b708d3a8a74aed04b">https://github.com/Otinanai1309/tweetmetoo/commit/1f531ce366ee6103dc44502b708d3a8a74aed04b</a></p>
+</div>
+<div class="section" id="react-rendered-by-django">
+<h2>06:23:07 64. React Rendered by Django<a class="headerlink" href="#react-rendered-by-django" title="Permalink to this headline"></a></h2>
+<p>I add few lines in settings.py about statifiles_dir and static_root
+and then i create the folders under twitterlikeapp2 (main app folder)</p>
+<p>Right after i copy all the contents from the Reacts folder
+build/static within the newly created static folder.</p>
+<p>Then in my projects folder i run</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="gp">$ </span>.<span class="se">\m</span>anage.py collectstatic
+</span><span class="go">167 static files copied to &#39;C:\MyDjangoRestfullReactApps\TwitterLikeApp2\static-root&#39;.</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/Otinanai1309/tweetmetoo/commit/5665549b7c9034428d0e0ccffc93e41e358af893">https://github.com/Otinanai1309/tweetmetoo/commit/5665549b7c9034428d0e0ccffc93e41e358af893</a></p>
+</div>
+<div class="section" id="render-react-app-via-any-django-template">
+<h2>06:30:22 65. Render React App via Any Django Template<a class="headerlink" href="#render-react-app-via-any-django-template" title="Permalink to this headline"></a></h2>
 </div>
 </div>
 
