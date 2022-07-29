@@ -128,4 +128,11 @@ https://github.com/Otinanai1309/tweetmetoo/commit/5665549b7c9034428d0e0ccffc93e4
 06:30:22 65. Render React App via Any Django Template
 -----------------------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/3bade35b4f3bfe1515692807b48f87e140d2da5d
+
+
+
+06:38:36 66. A Better XHR Lookup
+--------------------------------
+
 
