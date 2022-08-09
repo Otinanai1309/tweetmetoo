@@ -150,3 +150,10 @@ https://github.com/Otinanai1309/tweetmetoo/commit/a9dece378b36bcbd23f66a236e2811
 06:52:56 68. Dev Authentication
 -------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/3740a213da5b6310b48e6be768e0d6f959c37f20
+
+I still have problems with React part of the site.
+
+
+06:58:34 69. Handling New Tweet
+-------------------------------
