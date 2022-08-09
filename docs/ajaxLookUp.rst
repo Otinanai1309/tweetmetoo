@@ -144,5 +144,9 @@ https://github.com/Otinanai1309/tweetmetoo/commit/216ae053b7169cb1852023b73a761c
 We get an authentication error because csrftoken doen't load in React part of the program
 since we have implemented login using django. 
 
+https://github.com/Otinanai1309/tweetmetoo/commit/a9dece378b36bcbd23f66a236e2811b56e1b52a6
 
+
+06:52:56 68. Dev Authentication
+-------------------------------
 

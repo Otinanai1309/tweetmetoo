@@ -135,4 +135,18 @@ https://github.com/Otinanai1309/tweetmetoo/commit/3bade35b4f3bfe1515692807b48f87
 06:38:36 66. A Better XHR Lookup
 --------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/216ae053b7169cb1852023b73a761cabe3b51a4a
+
+
+06:43:54 67. Create Tweet in React
+----------------------------------
+
+We get an authentication error because csrftoken doen't load in React part of the program
+since we have implemented login using django. 
+
+https://github.com/Otinanai1309/tweetmetoo/commit/a9dece378b36bcbd23f66a236e2811b56e1b52a6
+
+
+06:52:56 68. Dev Authentication
+-------------------------------
 
