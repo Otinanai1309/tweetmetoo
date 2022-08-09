@@ -157,3 +157,10 @@ I still have problems with React part of the site.
 
 06:58:34 69. Handling New Tweet
 -------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/105555fbe18f1ea549509c53464f0c89f7f45e0c
+
+
+07:06:06 70. API Methods in React
+---------------------------------
+
