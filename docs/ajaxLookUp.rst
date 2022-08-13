@@ -182,3 +182,11 @@ https://github.com/Otinanai1309/tweetmetoo/commit/00b50e141da982401b38a6d008c590
 07:23:28 73. Improving the Tweet Action Button
 ----------------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/352ca659b76fba402aac1dccd9a140339e95ea02
+
+
+07:30:03 74. Prepending Dynamic Retweets
+----------------------------------------
+
+
+
