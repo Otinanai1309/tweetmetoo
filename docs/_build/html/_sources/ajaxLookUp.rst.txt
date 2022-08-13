@@ -170,3 +170,8 @@ https://github.com/Otinanai1309/tweetmetoo/commit/85de64261ec6777c15318fee3b37ce
 07:09:55 71. Tweet Action Btn
 -----------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/fe60393c7fb4f5ef6e49db74ad3c3b2eba07e432
+
+
+07:16:52 72. Rendering the ReTweet
+----------------------------------
