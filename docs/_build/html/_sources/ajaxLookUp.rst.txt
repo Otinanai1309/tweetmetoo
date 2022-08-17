@@ -175,3 +175,26 @@ https://github.com/Otinanai1309/tweetmetoo/commit/fe60393c7fb4f5ef6e49db74ad3c3b
 
 07:16:52 72. Rendering the ReTweet
 ----------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/00b50e141da982401b38a6d008c59061991d7ed4
+
+
+07:23:28 73. Improving the Tweet Action Button
+----------------------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/352ca659b76fba402aac1dccd9a140339e95ea02
+
+
+07:30:03 74. Prepending Dynamic Retweets
+----------------------------------------
+
+https://github.com/Otinanai1309/tweetmetoo/commit/700f8fb0f922e579527038f7c994fa41ab25918f
+
+
+07:37:24 75. Set Data Props on ReactDOM Render
+----------------------------------------------
+
+
+
+
+

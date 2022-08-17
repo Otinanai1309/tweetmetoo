@@ -188,5 +188,13 @@ https://github.com/Otinanai1309/tweetmetoo/commit/352ca659b76fba402aac1dccd9a140
 07:30:03 74. Prepending Dynamic Retweets
 ----------------------------------------
 
+https://github.com/Otinanai1309/tweetmetoo/commit/700f8fb0f922e579527038f7c994fa41ab25918f
+
+
+07:37:24 75. Set Data Props on ReactDOM Render
+----------------------------------------------
+
+
+
 
 
